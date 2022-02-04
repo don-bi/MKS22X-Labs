@@ -1,6 +1,6 @@
 public class Recursion {
     public static void main(String[] args) {
-        System.out.println(sqrt(2));
+        System.out.println(fibIter(12,1,0));
     }
 
     /*Print all words that are made of the letters a-e inclusive.
@@ -88,16 +88,31 @@ public class Recursion {
     *@return the number of words that have no adjacent matching letters using the letters a-z.
     *Repetition allowed except when letters are adjacent.
     */
-    public static long countNoDoubleLetterWords(int length,String word){
+    /*public static long countNoDoubleLetterWords(int length,String word){
     //Hint: not a wrapper method, but you must call it starting with "" as your word.
         if (length > 0) {
             for (char letter = 'a'; letter <= 'z'; letter ++){
                 if (word.length() == 0 || word.charAt(word.length()-1) != letter) {
-                    return countNoDoubleLetterWords(length, word+letter);
+                    countNoDoubleLetterWords(length, word+letter);
                 }
             }
         } else {
             return 1l;
+        }
+    }*/
+
+    /*
+    *@param n any non-negative value
+    *@return the nth term of the fibonacci sequence. 0, 1, 1, 2, 3, 5 etc.
+    */
+    public static int fibIter(int n, int f1, int f2){
+    //DO NOT call fibIter more than once
+        if (n == 0) {
+            return f2;
+        } else if (n == 1) {
+            return f1;
+        } else {
+            return fibIter(n-1,f1+f2,f1);
         }
     }
 }
