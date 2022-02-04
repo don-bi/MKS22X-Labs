@@ -1,6 +1,6 @@
 public class Recursion {
     public static void main(String[] args) {
-        System.out.println(reverse("abcde"));
+        System.out.println(sqrt(2));
     }
 
     /*Print all words that are made of the letters a-e inclusive.
@@ -62,6 +62,23 @@ public class Recursion {
             return s.charAt(s.length()-1) + reverse(s.substring(0,s.length()-1));
         } else {
             return s;
+        }
+    }
+
+    /*
+    *@param n any non-negative value you want to take the sqrt of
+    *@return the approximate sqrt of n within a tolerance of 0.001%
+    */
+    public static double sqrt(double n){
+    //Hint: This is a wrapper method
+        return sqrt(n, 1);
+    }
+
+    public static double sqrt(double n, double guess){
+        if (Math.abs((guess*guess - n)/n) < 0.00001){
+            return guess;
+        } else {
+            return sqrt(n, (n/guess + guess)/2);
         }
     }
 }
