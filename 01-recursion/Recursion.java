@@ -1,6 +1,6 @@
 public class Recursion {
     public static void main(String[] args) {
-        printNoDoubleLetterWords(3, new char[]{'a','b','c'});
+        System.out.println(reverse("abcde"));
     }
 
     /*Print all words that are made of the letters a-e inclusive.
@@ -50,6 +50,18 @@ public class Recursion {
             }
         } else {
             System.out.println(word);
+        }
+    }
+
+    /*
+    *@param s any string
+    *@return a string that is the reversed version of s, do NOT use built in methods to do so, use recursion.
+    */
+    public static String reverse(String s){
+        if (s.length() > 1){
+            return s.charAt(s.length()-1) + reverse(s.substring(0,s.length()-1));
+        } else {
+            return s;
         }
     }
 }
