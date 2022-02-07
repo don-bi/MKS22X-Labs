@@ -1,6 +1,29 @@
+import java.util.Scanner;
+
 public class Recursion {
     public static void main(String[] args) {
-        System.out.println(countNoDoubleLetterWords(3, ""));
+        String method = args[0];
+        if (method.equals("reverse")){
+            System.out.println(reverse((args[1])));
+        }
+        if (method.equals("sqrt")){
+            Scanner scan = new Scanner(System.in);
+            System.out.println("sqrt n:");
+            double n = scan.nextDouble();
+            System.out.println(sqrt(n));
+        }
+        if (method.equals("count")){
+            Scanner scan = new Scanner(System.in);
+            System.out.println("count length:");
+            int length = scan.nextInt();
+            System.out.println(countNoDoubleLetterWords(length, ""));
+        }
+        if (method.equals("fib")){
+            Scanner scan = new Scanner(System.in);
+            System.out.println("fib n:");
+            int n = scan.nextInt();
+            System.out.println(fibIter(n, 1, 0));
+        }
     }
 
     /*Print all words that are made of the letters a-e inclusive.
