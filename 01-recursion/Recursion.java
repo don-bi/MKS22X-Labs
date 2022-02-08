@@ -113,17 +113,17 @@ public class Recursion {
     */
     public static long countNoDoubleLetterWords(int length,String word){
     //Hint: not a wrapper method, but you must call it starting with "" as your word.\
-    long sum = 0;
         if (length > 0) {
+            long sum = 0;
             for (char letter = 'a'; letter <= 'z'; letter ++){
                 if (word.length() == 0 || word.charAt(word.length()-1) != letter) {
                     sum += countNoDoubleLetterWords(length-1, word+letter);
                 }
             }
+            return sum;
         } else {
             return 1;
         }
-        return sum;
     }
 
     /*
