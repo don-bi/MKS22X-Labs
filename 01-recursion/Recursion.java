@@ -134,8 +134,6 @@ public class Recursion {
     //DO NOT call fibIter more than once
         if (n == 0) {
             return f2;
-        } else if (n == 1) {
-            return f1;
         } else {
             return fibIter(n-1,f1+f2,f1);
         }
