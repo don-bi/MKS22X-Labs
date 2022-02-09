@@ -1,6 +1,6 @@
 public class codingbat {
     public static void main(String[] args) {
-        System.out.println(splitArray(new int[]{5,3,3}));
+        System.out.println(groupSum6(0, new int[]{5,6,2}, 7));
     }
 
     public static boolean groupSum(int start, int[] nums, int target){
@@ -14,6 +14,7 @@ public class codingbat {
         }
     }
 
+    //splitarray ------
     public static boolean splitArray(int[] nums){
         return splitArray(0, nums, 0);
     }
@@ -27,6 +28,22 @@ public class codingbat {
         } else {
             return splitArray(start+1, nums, value+nums[start]) ||
                 splitArray(start+1, nums, value-nums[start]);
+        }
+    }
+
+    //groupsum6------
+    public static boolean groupSum6(int start, int[] nums, int target){
+        if (0 == target){
+            return true;
+        } else if (start >= nums.length){
+            return false;
+        } else {
+            if (nums[start] == 6) {
+                return groupSum6(start+1, nums, target-nums[start]);
+            } else {
+                return groupSum6(start+1, nums, target-nums[start]) ||
+                groupSum6(start+1, nums, target);
+            }
         }
     }
 }
