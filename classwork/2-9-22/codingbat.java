@@ -45,4 +45,15 @@ public class codingbat {
             }
         }
     }
+
+    //groupnoadj
+    public static boolean groupNoAdj(int start, int[] nums, int target){
+        if (0 == target) return true;
+        else if (start >= nums.length){
+            return false;
+        } else {
+            return groupNoAdj(start+2, nums, target-nums[start]) ||
+            groupNoAdj(start+2, nums, target);
+        }
+    }
 }
