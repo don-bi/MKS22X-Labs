@@ -33,12 +33,13 @@ public class codingbat {
 
     //groupsum6------
     public static boolean groupSum6(int start, int[] nums, int target){
-        if (nums[start] == 6) {
+        if (start >= nums.length){
+            if (0 == target) return true;
+            return false;
+        } else if (nums[start] == 6) {
             return groupSum6(start+1, nums, target-nums[start]);
         } else if (0 == target){
             return true;
-        } else if (start >= nums.length){
-            return false;
         } else {
                 return groupSum6(start+1, nums, target-nums[start]) ||
                 groupSum6(start+1, nums, target);
