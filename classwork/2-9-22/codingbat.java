@@ -36,13 +36,13 @@ public class codingbat {
         if (start >= nums.length){
             if (0 == target) return true;
             return false;
-        } else if (nums[start] == 6) {
-            return groupSum6(start+1, nums, target-nums[start]);
-        } else if (0 == target){
-            return true;
         } else {
+            if (nums[start] == 6) {
+                return groupSum6(start+1, nums, target-nums[start]);
+            } else {
                 return groupSum6(start+1, nums, target-nums[start]) ||
                 groupSum6(start+1, nums, target);
+            }
         }
     }
 }
