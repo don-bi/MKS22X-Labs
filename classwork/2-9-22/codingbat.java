@@ -3,14 +3,14 @@ public class codingbat {
         
     }
 
-    public static boolean groupSum(){
-        if (0 == targetValue){
+    public static boolean groupSum(int start, int[] nums, int target){
+        if (0 == target){
             return true;
-        } else if (start >= arr.length){
+        } else if (start >= nums.length){
             return false;
         } else {
-            return partialSum(start+1, arr, targetValue-arr[start]) ||
-                partialSum(start+1, arr, targetValue);
+            return partialSum(start+1, nums, target-nums[start]) ||
+                partialSum(start+1, nums, target);
         }
     }
 }
