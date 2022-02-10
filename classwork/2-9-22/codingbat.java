@@ -1,6 +1,6 @@
 public class codingbat {
     public static void main(String[] args) {
-        System.out.println(splitOdd10(0, new int[]{5,5,6}, 0, 0));
+        System.out.println(split53(new int[]{5,3,8}));
     }
 
     public static boolean groupSum(int start, int[] nums, int target){
@@ -60,6 +60,7 @@ public class codingbat {
     public static boolean splitOdd10(int[] nums){
         return splitOdd10(0, nums, 0, 0);
     }
+
     public static boolean splitOdd10(int start, int[] nums, int group1, int group2){
         if (start >= nums.length){
             if (group1 % 10 == 0 && group2 % 2 == 1) return true;
@@ -67,6 +68,25 @@ public class codingbat {
         } else {
             return splitOdd10(start+1, nums, group1 + nums[start], group2) ||
                 splitOdd10(start+1, nums, group1, group2 + nums[start]);
+        }
+    }
+
+    public static boolean split53(int[] nums){
+        return split53(0, nums, 0);
+    }
+    public static boolean split53(int start, int[] nums, int value){
+        if (start >= nums.length){
+            if (0 == value) return true;
+            return false;
+        } else {
+            if (nums[start]%5==0){
+                return split53(start+1, nums, value+nums[start]);
+            } else if (nums[start]%3==0){
+                return split53(start+1, nums, value-nums[start]);
+            } else {
+                return split53(start+1, nums, value+nums[start]) ||
+                split53(start+1, nums, value-nums[start]);
+            }
         }
     }
 }
