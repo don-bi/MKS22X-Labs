@@ -53,7 +53,7 @@ public class codingbat {
             return false;
         } else {
             return groupNoAdj(start+2, nums, target-nums[start]) ||
-            groupNoAdj(start+2, nums, target);
+            groupNoAdj(start+1, nums, target) ;
         }
     }
 }
