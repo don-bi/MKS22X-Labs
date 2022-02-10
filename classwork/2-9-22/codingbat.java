@@ -1,6 +1,6 @@
 public class codingbat {
     public static void main(String[] args) {
-        System.out.println(split53(new int[]{5,3,8}));
+        System.out.println(groupSumClump(0, new int[]{2,4,4,8},14));
     }
 
     public static boolean groupSum(int start, int[] nums, int target){
@@ -104,6 +104,21 @@ public class codingbat {
                 return groupSum5(start+1, nums, target-nums[start]) ||
                 groupSum5(start+1, nums, target);
             }
+        }
+    }
+
+    public static boolean groupSumClump(int start, int[] nums, int target){
+        if (start >= nums.length){
+            if (0 == target) return true;
+            return false;
+        } else {
+            int i = start;
+            while (i < nums.length && nums[i] == nums[start]){
+                i++;
+            }
+            int diff = i-start;
+            return groupSumClump(start+diff, nums, target-nums[start]*diff) ||
+                groupSumClump(start+diff, nums, target);
         }
     }
 }
