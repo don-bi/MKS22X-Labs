@@ -1,6 +1,6 @@
 public class challenges {
     public static void main(String[] args) {
-        System.out.println(toWords(76245));
+        System.out.println(toWords(-7654));
     }
 
     public static String toWords(int n){
@@ -9,6 +9,9 @@ public class challenges {
         String[] tens = {"eleven","twelve","thirteen","fourteen","fifteen","sixteen",
                         "seventeen","eighteen","nineteen"};
         String[] tensbegin = {"twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"};
+        if (n < 0){
+            return "negative " + toWords(-n);
+        }
         if (n == 0){
             return "zero";
         } else if (n <= 10 && n > 0){
