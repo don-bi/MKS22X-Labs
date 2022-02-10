@@ -22,8 +22,14 @@ public class challenges {
                 return tensbegin[n/10-2] + "-" + toWords(n-n/10*10);
             }
         } else if (n >= 100 && n < 1000){
+            if (n%10==0){
+                return ones[n/100-1] + " hundred ";
+            }
             return ones[n/100-1] + " hundred " + toWords(n-n/100*100);
         } else if (n >= 1000 && n < 1000000){
+            if (n%10==0){
+                return toWords(n/1000) + " thousand ";
+            }
             return toWords(n/1000) + " thousand " + toWords(n-n/1000*1000);
         } return "";
     }
