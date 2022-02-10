@@ -57,6 +57,9 @@ public class codingbat {
         }
     }
 
+    public static boolean splitOdd10(int[] nums){
+        return splitOdd10(0, nums, 0, 0);
+    }
     public static boolean splitOdd10(int start, int[] nums, int group1, int group2){
         if (start >= nums.length){
             if (group1 % 10 == 0 && group2 % 2 == 1) return true;
