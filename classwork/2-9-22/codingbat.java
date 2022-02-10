@@ -1,6 +1,11 @@
 public class codingbat {
     public static void main(String[] args) {
-        System.out.println(groupSumClump(0, new int[]{2,4,4,8},14));
+        String[][]wordlists = {
+            {"The dog", "The pro skater"},
+            {"plays" , "empathises with" },
+            {"chess", "ball", "the voiceless masses"}
+          };
+          permute(wordlists,"",0);
     }
 
     public static boolean groupSum(int start, int[] nums, int target){
@@ -119,6 +124,19 @@ public class codingbat {
             int diff = i-start;
             return groupSumClump(start+diff, nums, target-nums[start]*diff) ||
                 groupSumClump(start+diff, nums, target);
+        }
+    }
+
+    //current is the current index, which starts at 0 when you invoke the method in your main
+    //the sentence starts at "", the recursion concatenates the words
+    //base case should print the sentence
+    public static void permute(String[][]lists, String sentence, int current){
+        if (current == lists.length){
+            System.out.println(sentence);
+        } else {
+            for (int i = 0; i < lists[current].length; i ++){
+                permute(lists, sentence + " " + lists[current][i], current+1);
+            }
         }
     }
 }
