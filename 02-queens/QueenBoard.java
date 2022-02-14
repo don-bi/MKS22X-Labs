@@ -36,9 +36,9 @@ public class QueenBoard {
         for (int i = 0; i < board.length; i ++){
             for (int j = 0; j < board[i].length; j ++) {
                 if (board[i][j] == -1){
-                    System.out.print("Q");
+                    System.out.print("Q ");
                 } else {
-                    System.out.print(board[i][j]);
+                    System.out.print(board[i][j] + " ");
                 }
             }
             System.out.println();
@@ -58,14 +58,15 @@ public class QueenBoard {
     }
 
     private boolean modifyQueen(int r, int c, int inc){
-        if (board[r][c] == 0) {
-            board[r][c] --;
+        if (board[r][c] == 0 || inc == -1) {
+            board[r][c] -= inc;
             for (int horz = -1; horz < 2; horz ++) {
                 int rcopy = r;
-                while (inBounds(rcopy+1, c+horz, board)){
+                int ccopy = c;
+                while (inBounds(rcopy+1, ccopy+horz, board)){
                      rcopy++;
-                     c+=horz;
-                     board[r][c] += inc;
+                     ccopy+=horz;
+                     board[rcopy][ccopy] += inc;
                 }
             }
             return true;
@@ -74,18 +75,19 @@ public class QueenBoard {
     }
 
     private boolean inBounds(int r, int c, int[][] board){
-        if (r < board.length && c > -1 && c < board[0].length) return true;
+        int side = board.length;
+        if (r < side && c > -1 && c < side) return true;
         return false;
     }
-}
     /**Remove the queen that was added to r,c
      *@precondition r and c are valid indices of the board array and there is a queen at position r,c
     *@postcondition the board is modified to remove that queen and all it's
     *threatened positions are decremented
     */
-    /*public void modifyQueen(r, c, -1);
+    public void removeQueen(int r, int c){
+        modifyQueen(r, c, -1);
     }
-
+}
 
     /**Find the first solution configuration possible for this size board. Start by placing
      *  the 1st queen in the top left corner, and each new queen in the next ROW. When backtracking
