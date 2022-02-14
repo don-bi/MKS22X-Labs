@@ -32,7 +32,7 @@ public class QueenBoard {
         return all;
     }
 
-    
+
 
     /**
      *@return true when the queen added correctly, false Otherwise
@@ -41,16 +41,35 @@ public class QueenBoard {
     * in which case the queen is added and all it's threatened positions are incremented
     */
     private boolean addQueen(int r, int c){
-
+        return modifyQueen(r, c, 1);
     }
 
+    private boolean modifyQueen(int r, int c, int inc){
+        if (board[r][c] == 0) {
+            board[r][c] --;
+            for (int horz = -1; horz < 2; horz ++) {
+                while (inBounds(r, c, board)){
+                     r--;
+                     c+=horz;
+                     board[r][c] += inc;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private boolean inBounds(int r, int c, int[][] board){
+        if (r < board.length && c > -1 && c < board[r].length) return true;
+        return false;
+    }
     /**Remove the queen that was added to r,c
      *@precondition r and c are valid indices of the board array and there is a queen at position r,c
     *@postcondition the board is modified to remove that queen and all it's
     *threatened positions are decremented
     */
     private void removeQueen(int r, int c){
-
+        modifyQueen(r, c, -1);
     }
 
 
