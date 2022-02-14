@@ -32,6 +32,19 @@ public class QueenBoard {
         return all;
     }
 
+    public void toStringTesting(){
+        for (int i = 0; i < board.length; i ++){
+            for (int j = 0; j < board[i].length; j ++) {
+                if (board[i][j] == -1){
+                    System.out.print("Q");
+                } else {
+                    System.out.print(board[i][j]);
+                }
+            }
+            System.out.println();
+        }
+    }
+
 
 
     /**
@@ -40,7 +53,7 @@ public class QueenBoard {
     *@postcondition the board is only changed when the function returns true
     * in which case the queen is added and all it's threatened positions are incremented
     */
-    private boolean addQueen(int r, int c){
+    public boolean addQueen(int r, int c){
         return modifyQueen(r, c, 1);
     }
 
@@ -48,8 +61,9 @@ public class QueenBoard {
         if (board[r][c] == 0) {
             board[r][c] --;
             for (int horz = -1; horz < 2; horz ++) {
-                while (inBounds(r, c, board)){
-                     r--;
+                int rcopy = r;
+                while (inBounds(rcopy+1, c+horz, board)){
+                     rcopy++;
                      c+=horz;
                      board[r][c] += inc;
                 }
@@ -60,16 +74,16 @@ public class QueenBoard {
     }
 
     private boolean inBounds(int r, int c, int[][] board){
-        if (r < board.length && c > -1 && c < board[r].length) return true;
+        if (r < board.length && c > -1 && c < board[0].length) return true;
         return false;
     }
+}
     /**Remove the queen that was added to r,c
      *@precondition r and c are valid indices of the board array and there is a queen at position r,c
     *@postcondition the board is modified to remove that queen and all it's
     *threatened positions are decremented
     */
-    private void removeQueen(int r, int c){
-        modifyQueen(r, c, -1);
+    /*public void modifyQueen(r, c, -1);
     }
 
 
@@ -82,7 +96,7 @@ public class QueenBoard {
     *        returns true when the board is solveable, and leaves the board in a solved state
     *@throws IllegalStateException when the board starts with any non-zero value (e.g. you solved a 2nd time.)
     */
-    public boolean solve(){
+    /*public boolean solve(){
 
     }
 
@@ -91,7 +105,7 @@ public class QueenBoard {
      *@return the number of solutions found, and leaves the board filled with only 0's
     *@throws IllegalStateException when the board starts with any non-zero value (e.g. you ran solve() before this method)
     */
-    public int countSolutions(){
+    /*public int countSolutions(){
 
     }
-}
+}*/
