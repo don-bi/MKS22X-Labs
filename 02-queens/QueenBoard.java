@@ -1,4 +1,5 @@
 public class QueenBoard {
+    
     private int[][] board;
 
     public QueenBoard(int size){
@@ -53,7 +54,7 @@ public class QueenBoard {
     *@postcondition the board is only changed when the function returns true
     * in which case the queen is added and all it's threatened positions are incremented
     */
-    public boolean addQueen(int r, int c){
+    private boolean addQueen(int r, int c){
         return modifyQueen(r, c, 1);
     }
 
@@ -84,10 +85,9 @@ public class QueenBoard {
     *@postcondition the board is modified to remove that queen and all it's
     *threatened positions are decremented
     */
-    public void removeQueen(int r, int c){
+    private void removeQueen(int r, int c){
         modifyQueen(r, c, -1);
     }
-}
 
     /**Find the first solution configuration possible for this size board. Start by placing
      *  the 1st queen in the top left corner, and each new queen in the next ROW. When backtracking
@@ -98,9 +98,37 @@ public class QueenBoard {
     *        returns true when the board is solveable, and leaves the board in a solved state
     *@throws IllegalStateException when the board starts with any non-zero value (e.g. you solved a 2nd time.)
     */
-    /*public boolean solve(){
-
+    public boolean solve(){
+        for (int i = 0; i < board.length; i++){
+            for (int j = 0; j < board[i].length; j++){
+                if (board[i][j]!=0){
+                    throw new IllegalStateException();
+                }
+            }
+        }
+        return solve(0);
     }
+
+    public boolean solve(int r){
+        if (r == board.length){
+            return true;
+        } else {
+            for (int c = 0; c < board.length; c++){
+                if (addQueen(r, c)){
+                    System.out.println(Text.go(1,1));
+                    System.out.println(this);//can change this to your debug print as well
+                    Text.wait(50);//change the delay 1000 = 1 second
+                    if(solve(r+1)) return true;
+                    removeQueen(r, c);
+                }
+                System.out.println(Text.go(1,1));
+                System.out.println(this);//can change this to your debug print as well
+                Text.wait(50);//change the delay 1000 = 1 second
+            }
+            return false;
+        }
+    }
+}
 
 
     /**Find all possible solutions to this size board.
