@@ -138,14 +138,35 @@ public class QueenBoard {
             return false;
         }
     }
-}
 
 
     /**Find all possible solutions to this size board.
      *@return the number of solutions found, and leaves the board filled with only 0's
     *@throws IllegalStateException when the board starts with any non-zero value (e.g. you ran solve() before this method)
     */
-    /*public int countSolutions(){
-
+    public int countSolutions(){
+        for (int i = 0; i < board.length; i++){
+            for (int j = 0; j < board[i].length; j++){
+                if (board[i][j]!=0){
+                    throw new IllegalStateException();
+                }
+            }
+        }
+        return countSolutions(0);
     }
-}*/
+
+    public int countSolutions(int r){
+        if (r == board.length){
+            return 1;
+        } else {
+            int count = 0;
+            for (int c = 0; c < board.length; c++){
+                if (addQueen(r, c)){
+                    count += countSolutions(r+1);
+                    removeQueen(r, c);
+                }
+            }
+            return count;
+        }
+    }
+}

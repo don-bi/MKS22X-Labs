@@ -1,3 +1,7 @@
+import java.util.concurrent.CountDownLatch;
+
+import javax.swing.event.SwingPropertyChangeSupport;
+
 public class Driver {
     public static void main(String[] args) {
         int SIZE = 8;
@@ -8,11 +12,15 @@ public class Driver {
         if(args.length > 1){
             b.setAnimate(true);
             b.setDelay(Integer.parseInt(args[1]));
+            System.out.println(Text.CLEAR_SCREEN);
+            System.out.println(Text.HIDE_CURSOR);
+            System.out.println(Text.go(1,1));
+            b.solve();
+            System.out.println(Text.RESET);
+        } else {
+            System.out.println(b.countSolutions());
+            b.solve();
+            System.out.println(b.toString());
         }
-        System.out.println(Text.CLEAR_SCREEN);
-        System.out.println(Text.HIDE_CURSOR);
-        System.out.println(Text.go(1,1));
-        b.solve();
-        System.out.println(Text.RESET);
     }
 }
