@@ -1,5 +1,5 @@
 public class QueenBoard {
-    
+
     private int[][] board;
     
     private boolean animated;
@@ -126,6 +126,11 @@ public class QueenBoard {
         } else {
             for (int c = 0; c < board.length; c++){
                 if (addQueen(r, c)){
+                    if(animated){
+                        System.out.println(Text.go(1,1));
+                        System.out.println(this);//can modify here
+                        Text.wait(delay);
+                    }
                     if(solve(r+1)) return true;
                     removeQueen(r, c);
                 }
