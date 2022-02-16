@@ -1,6 +1,17 @@
 public class QueenBoard {
     
     private int[][] board;
+    
+    private boolean animated;
+    private int delay;
+    
+    public void setAnimate(boolean bool){
+        animated = bool;
+    }
+
+    public void setDelay(int d){
+        delay = d;
+    }
 
     public QueenBoard(int size){
         board = new int[size][size];
