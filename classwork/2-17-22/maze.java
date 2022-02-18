@@ -1,65 +1,49 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.NoSuchFileException;
 import java.util.Scanner;
 import java.util.Arrays;
+import java.util.ArrayList;
 
 public class maze {
     public static void main(String[] args) {
-        System.out.println(twoToString(fileToMap("Maze1.txt")));
-    }
-
-    public static char[][] solve(char[][] map, int r, int c){
-        if (map[r][c] == 'E'){
-            return map;
-        } else {
-            
+        try{
+            System.out.println(twoToString(fileToMap("Maze1.txt")));
+        } catch (FileNotFoundException e) {
+            System.out.println("no file bruh");
         }
     }
 
-    public static void move(char[][] map, int r, int c){
-        if (map[r][c] == ' ') {
+    public static boolean solve(char[][] map, int r, int c){
+        if (map[r][c]=='E'){
             return true;
+        } else {
+            if ()
         }
+        
     }
-    public static char[][] fileToMap(String f){
-        char[][] map = new char[countLines(f)][];
-        try {
-            File file = new File(f);
-            Scanner scan = new Scanner(file);
-            int r = 0;}
-            while(scan.hasNextLine()){
-                String line = scan.nextLine();
-                String[] row = line.split("");
-                char[] rowchar = stringArrToChar(row);
-                map[r] = rowchar;
-                r ++;
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("no file bruh");
+    public static char[][] fileToMap(String f) throws FileNotFoundException{
+        ArrayList<char[]> tempmap = new ArrayList<char[]>(); 
+        File file = new File(f);
+        Scanner scan = new Scanner(file);
+        while(scan.hasNextLine()){
+            String line = scan.nextLine();
+            String[] row = line.split("");
+            char[] rowchar = stringArrToChar(row);
+            tempmap.add(rowchar);
         }
-        return map;
-    }
-
-    public static int countLines(String f){
-        int count = 0;
-        try {
-            File file = new File(f);
-            Scanner scan = new Scanner(file);
-            while(scan.hasNextLine()){
-                count ++;
-                scan.nextLine();
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("no file bruh");
-        }
-        return count;
+        return alistToArray(tempmap);
     }
 
     public static String twoToString(char[][] a){
         String result = "[";
         for (int i = 0; i < a.length; i ++) {
-            result += Arrays.toString(a[i]);
-            if (i != a.length-1) result += ",\n";
+            result += "[";
+            for (int j = 0; j < a[i].length; j ++){
+                result += a[i][j];
+                if (i != a[i].length-1) result += ",";
+            }
+            if (i != a.length-1) result += "],\n";
         }
         return result += "]";
     }
@@ -83,5 +67,13 @@ public class maze {
             }
         }
         return cords;
+    }
+
+    public static char[][] alistToArray(ArrayList<char[]> a){
+        char[][] map = new char[a.size()][];
+        for (int i = 0; i < a.size(); i ++){
+            map[i] = a.get(i);
+        }
+        return map;
     }
 }
