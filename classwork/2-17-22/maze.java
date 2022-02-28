@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.ArrayList;
 
 public class maze {
+
+    private char[][] map;
     public static void main(String[] args) {
         try{
             System.out.println(twoToString(fileToMap("Maze1.txt")));
@@ -14,13 +16,31 @@ public class maze {
         }
     }
 
-    public static boolean solve(char[][] map, int r, int c){
+    public boolean solve(int r, int c){
         if (map[r][c]=='E'){
             return true;
         } else {
-            if ()
+            if (move(r+1,c)){
+                if (solve(r+1,c){
+                    return true;
+                }  
+                leave(r+1,c)
+            }
+            return false;
         }
         
+    }
+
+    private boolean move(int r, int c){
+        if (map[r][c] == ' '){
+            map[r][c] = '/';
+            return true;
+        } else {
+            return false;
+        }
+    }
+    private void leave(int r, int c){
+        map[r][c] = ' ';
     }
     public static char[][] fileToMap(String f) throws FileNotFoundException{
         ArrayList<char[]> tempmap = new ArrayList<char[]>(); 
