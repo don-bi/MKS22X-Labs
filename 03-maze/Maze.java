@@ -22,7 +22,6 @@ Make sure your file reading is able to handle this.
 */
 public Maze(String filename) throws FileNotFoundException{
     //COMPLETE CONSTRUCTOR
-    animate = false;
     ArrayList<char[]> tempmap = new ArrayList<char[]>(); 
     File file = new File(filename);
     Scanner scan = new Scanner(file);
@@ -33,6 +32,9 @@ public Maze(String filename) throws FileNotFoundException{
         tempmap.add(rowchar);
     }
     maze = alistToArray(tempmap);
+    animate = false;
+    startRow = findCords(maze, 'S')[0];
+    startRow = findCords(maze, 'S')[1];
 }
 
 public static char[][] alistToArray(ArrayList<char[]> a){
@@ -41,6 +43,19 @@ public static char[][] alistToArray(ArrayList<char[]> a){
         map[i] = a.get(i);
     }
     return map;
+}
+
+public static int[] findCords(char[][] a, char target){
+    int[] cords = new int[2];
+    for (int i = 0; i < a.length; i ++){
+        for (int j = 0; j < a.length; j ++){
+            if (a[i][j] == target){
+                cords[0] = i;
+                cords[1] = j;
+            }
+        }
+    }
+    return cords;
 }
 
 private void wait(int millis){
@@ -68,7 +83,16 @@ public static void gotoTop(){
 It should look like the text file with some characters replaced.
 */
 public String toString(){
-    return "WRITE THIS METHOD";
+    String result = "";
+    for (int i = 0; i < maze.length; i ++){
+        for (int j = 0; j < maze[i].length; j ++){
+            result += maze[i][j];
+        }
+        if (i != maze.length - 1){
+            result += "\n";
+        }
+    }
+    return result;
 }
 
 /*Wrapper Solve Function returns the helper function
