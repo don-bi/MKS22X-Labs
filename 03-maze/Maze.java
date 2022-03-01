@@ -38,6 +38,14 @@ public Maze(String filename) throws FileNotFoundException{
     startCol = cords[1];
 }
 
+public static char[] stringArrToChar(String[] a){
+    char[] ans = new char[a.length];
+    for (int i = 0; i < a.length; i ++) {
+        ans[i] = a[i].charAt(0);
+    }
+    return ans;
+}
+
 public static char[][] alistToArray(ArrayList<char[]> a){
     char[][] map = new char[a.size()][];
     for (int i = 0; i < a.size(); i ++){
