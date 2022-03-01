@@ -57,7 +57,7 @@ public static char[][] alistToArray(ArrayList<char[]> a){
 public static int[] findCords(char[][] a, char target){
     int[] cords = new int[2];
     for (int i = 0; i < a.length; i ++){
-        for (int j = 0; j < a.length; j ++){
+        for (int j = 0; j < a[i].length; j ++){
             if (a[i][j] == target){
                 cords[0] = i;
                 cords[1] = j;
@@ -140,17 +140,23 @@ private int solve(int row, int col, int count){ //you can add more parameters si
         wait(50);
     }
     if (maze[row][col] != 'S' && maze[row][col] != ' '){
-        if (maze[row][col] == 'E') return count;
+        if (maze[row][col] == 'E') return 5;
         return -1; 
     } else {
         maze[row][col] = '@';
         int[][] dir = {{row+1,col},{row-1,col},{row,col+1},{row,col-1}};
+        int n = 0;
         for (int i = 0; i < dir.length; i ++){
-            solve(dir[i][0],dir[i][1],count+1);
+            n += solve(dir[i][0],dir[i][1],count+1);
+            if (n > 0) {
+                return count;
+            }
         }
-        maze[row][col] = '.';
+        if (n == -4) {
+            maze[row][col] = '.';
+        }
     }
     //COMPLETE SOLVE
-    return -1; //so it compiles
+    return count; //so it compiles
 }
 }
