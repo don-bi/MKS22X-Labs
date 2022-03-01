@@ -33,8 +33,9 @@ public Maze(String filename) throws FileNotFoundException{
     }
     maze = alistToArray(tempmap);
     animate = false;
-    startRow = findCords(maze, 'S')[0];
-    startRow = findCords(maze, 'S')[1];
+    int[] cords = findCords(maze, 'S');
+    startRow = cords[0];
+    startCol = cords[1];
 }
 
 public static char[][] alistToArray(ArrayList<char[]> a){
@@ -130,7 +131,16 @@ private int solve(int row, int col){ //you can add more parameters since this is
     System.out.println(this);
     wait(50);
     }
-
+    if (maze[row][col] != 'S' && maze[row][col] != ' '){
+        return -1;
+    } else {
+        maze[row][col] = '@';
+        int[][] dir = {{row+1,col},{row-1,col},{row,col+1},{row,col-1}};
+        for (int i = 0; i < dir.length; i ++){
+            solve(dir[i][0],dir[i][1]);
+        }
+        maze[row][col] = '.';
+    }
     //COMPLETE SOLVE
     return -1; //so it compiles
 }
