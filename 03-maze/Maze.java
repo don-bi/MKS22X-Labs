@@ -41,7 +41,9 @@ public Maze(String filename) throws FileNotFoundException{
 public static char[] stringArrToChar(String[] a){
     char[] ans = new char[a.length];
     for (int i = 0; i < a.length; i ++) {
-        ans[i] = a[i].charAt(0);
+        if (a[i].length() > 0){
+            ans[i] = a[i].charAt(0);
+        }
     }
     return ans;
 }
@@ -134,16 +136,16 @@ All visited spots that are part of the solution are changed to '@'
 */
 private int solve(int row, int col){ //you can add more parameters since this is private
     //automatic animation! You are welcome.
-    if(animate){
-        gotoTop();
-        System.out.println(this);
-        wait(50);
-    }
     if (maze[row][col] != 'S' && maze[row][col] != ' '){
         if (maze[row][col] == 'E') return 0;
         return -1; 
     } else {
         maze[row][col] = '@';
+        if(animate){
+            gotoTop();
+            System.out.println(this);
+            wait(50);
+        }
         int[][] dir = {{row+1,col},{row-1,col},{row,col+1},{row,col-1}};
         for (int i = 0; i < dir.length; i ++){
             int s = solve(dir[i][0],dir[i][1]);
@@ -152,6 +154,11 @@ private int solve(int row, int col){ //you can add more parameters since this is
             }
         }
         maze[row][col] = '.';
+        if(animate){
+            gotoTop();
+            System.out.println(this);
+            wait(50);
+        }
         return -1;
     }
     //COMPLETE SOLVE
