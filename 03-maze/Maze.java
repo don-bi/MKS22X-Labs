@@ -114,7 +114,7 @@ public int solve(){
     clearTerminal();
     }
     //start solving at the location of the s.
-    return solve(startRow,startCol,0);
+    return solve(startRow,startCol);
 
 }
 
@@ -132,7 +132,7 @@ The 'E' remain the same
 All visited spots that were not part of the solution are changed to '.'
 All visited spots that are part of the solution are changed to '@'
 */
-private int solve(int row, int col, int count){ //you can add more parameters since this is private
+private int solve(int row, int col){ //you can add more parameters since this is private
     //automatic animation! You are welcome.
     if(animate){
         gotoTop();
@@ -140,23 +140,20 @@ private int solve(int row, int col, int count){ //you can add more parameters si
         wait(50);
     }
     if (maze[row][col] != 'S' && maze[row][col] != ' '){
-        if (maze[row][col] == 'E') return 5;
+        if (maze[row][col] == 'E') return 0;
         return -1; 
     } else {
         maze[row][col] = '@';
         int[][] dir = {{row+1,col},{row-1,col},{row,col+1},{row,col-1}};
-        int n = 0;
         for (int i = 0; i < dir.length; i ++){
-            n += solve(dir[i][0],dir[i][1],count+1);
-            if (n > 0) {
-                return count;
+            int s = solve(dir[i][0],dir[i][1]);
+            if (s > -1) {
+                return s + 1;
             }
         }
-        if (n == -4) {
-            maze[row][col] = '.';
-        }
+        maze[row][col] = '.';
+        return -1;
     }
     //COMPLETE SOLVE
-    return count; //so it compiles
 }
 }
