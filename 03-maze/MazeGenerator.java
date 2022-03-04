@@ -5,10 +5,10 @@ public class MazeGenerator {
         if (maze[row][col] == '#' && checkConditions(maze, row, col)){
             maze[row][col] = ' ';
             ArrayList<int[]> dir = makeDir(row, col);
-            for () 
-            generate(maze, row, col);
-        } else {
-        }
+            for (int i = 0; i < dir.size(); i ++){
+                generate(maze, dir.get(i)[0], dir.get(i)[1]);
+            } 
+        } 
     }
     private static ArrayList<int[]> makeDir(int row, int col){
         ArrayList<int[]> dir = new ArrayList<int[]>();

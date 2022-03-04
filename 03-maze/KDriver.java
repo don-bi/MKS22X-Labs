@@ -7,10 +7,15 @@ public class KDriver{
           int startrow = Integer.parseInt(args[2]);
           int startcol = Integer.parseInt(args[3]);
           char[][]maze = new char[rows][cols];
+          for (int i = 0; i < maze.length; i ++){
+              for (int j = 0; j < maze[i].length; j ++){
+                    maze[i][j] = '#';
+              }
+          }
           //you must fill maze with '#'
           MazeGenerator.generate(maze,startrow,startcol);
           //Print the maze here.
-          System.out.println("MAZE!");//You need a way to show the maze without the array brackets etc.
+          printMaze(maze);;//You need a way to show the maze without the array brackets etc.
         }else if(args.length == 1  || args.length == 2){
             try{
                 Maze m = new Maze(args[0]);
@@ -29,5 +34,14 @@ public class KDriver{
             System.out.println("To Generate: java KDriver rows cols startRow startCol");
         }
 
+    }
+
+    public static void printMaze(char[][] maze){
+        for (int i = 0; i < maze.length; i ++){
+            for (int j = 0; j < maze[i].length; j ++){
+                System.out.print(maze[i][j]);
+            }
+            System.out.println();
+        }
     }
 }
