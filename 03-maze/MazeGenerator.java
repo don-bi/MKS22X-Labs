@@ -7,12 +7,17 @@ public class MazeGenerator {
         printarl(makeDir(5, 3));
     }
 
-    public static void generate(char[][] maze,int row, int col){
+    public static void generate(char[][] maze,int row,int col){
+        generate(maze, row, col, 0, 0, false);
+    }
+
+    public static void generateAnimate(char[][] maze,int row, int col){
         clearTerminal();
         generate(maze, row, col, 0, 0, true);
     }
     public static void generate(char[][] maze,int row, int col, int prevrow, int prevcol, boolean animate){
-        if (maze[row][col] == '#' && checkConditions(maze, row, col, prevrow, prevcol)){
+        if (maze[row][col] == '#' && isValid(maze, row, col, prevrow, prevcol)){
+            //System.out.println("passes: [" + row + ", " + col + "]");
             maze[row][col] = ' ';
             if(animate){
                 gotoTop();
@@ -25,6 +30,8 @@ public class MazeGenerator {
             } 
         }
     }
+
+    //Method to randomly put the four directions in an array
     private static ArrayList<int[]> makeDir(int row, int col){
         ArrayList<int[]> dir = new ArrayList<int[]>();
         dir.add(new int[]{row+1,col});
@@ -40,23 +47,31 @@ public class MazeGenerator {
         return randdir;
     }
 
-    private static boolean checkConditions(char[][]m,int r,int c,int pv,int pc){
+    //checks if space is out of bounds or has less than two blanks around it
+    public static boolean isValid(char[][]m,int r,int c,int pr,int pc){
         boolean bool = true;
         bool = r != 0 && 
         r != m.length-1 && 
         c != 0 && 
         c != m[0].length-1;
+        int countspace = 0;
         if (bool) {
-            int[][] dirs = {{r+1,c},{r-1,c},{r,c+1},{r,c-1},{r+1,c+1},{r+1,c-1},{r-1,c+1},{r-1,c-1}};
-            for (int i = 0; i < dirs.length; i ++){
-                if (dirs[i][0] != pv && dirs[i][1] != pc){
-                    bool = m[dirs[i][0]][dirs[i][1]] != ' ';
+            for (int incr = -1; incr < 2; incr ++){
+                for (int incc = -1; incc < 2; incc ++){
+                    //System.out.println("check: [" + (r + incr) + ", " + (c + incc) + "]" + m[r + incr][c + incc]);
+                    if (!(r + incr == pr && c + incc == pc)){
+                        if(m[r + incr][c + incc] == ' '){
+                            countspace ++;
+                        } 
+                    }
                 }
             }
         }
-        return bool;
+        //System.out.println(countspace);
+        return bool && countspace < 2;
     }
     
+    //prints array list (testing makeDir)
     private static void printarl(ArrayList<int[]> a){
         for (int i = 0; i < a.size(); i ++){
             System.out.println(Arrays.toString(a.get(i)));;
@@ -64,6 +79,7 @@ public class MazeGenerator {
         }
     }
 
+    //animate methods
     private static void wait(int millis){
         try {
         Thread.sleep(millis);
