@@ -3,10 +3,6 @@ import java.util.Arrays;
 
 public class MazeGenerator {
 
-    public static void main(String[] args) {
-        printarl(makeDir(5, 3));
-    }
-
     public static void generate(char[][] maze,int row,int col){
         maze[row][col] = 'S';
         generate(maze, row, col, 0, 0, false);
@@ -38,7 +34,7 @@ public class MazeGenerator {
                     }
                 }
             } else {
-                ArrayList<int[]> dir = makeDir(row, col);
+                ArrayList<int[]> dir = makeDir(row, col, prevrow, prevcol);
                 for (int i = 0; i < dir.size(); i ++){
                     generate(maze, dir.get(i)[0], dir.get(i)[1], row, col, animate);
                 } 
@@ -83,14 +79,23 @@ public class MazeGenerator {
         }
     }
     //Method to randomly put the four directions in an array
-    private static ArrayList<int[]> makeDir(int row, int col){
+    private static ArrayList<int[]> makeDir(int row, int col, int pr, int pc){
         ArrayList<int[]> dir = new ArrayList<int[]>();
         dir.add(new int[]{row+1,col});
         dir.add(new int[]{row-1,col});
         dir.add(new int[]{row,col+1});
         dir.add(new int[]{row,col-1});
         ArrayList<int[]> randdir = new ArrayList<int[]>();
-        for (int i = 4; i > 0; i --){
+        //40% chance to be the same direction as before
+        if (Math.random()<0.4){
+            for (int i = 0; i < dir.size(); i ++){
+                if (dir.get(i)[0] - 2 == pr || dir.get(i)[1] - 2 == pc){
+                    int[] coords = dir.remove(i);
+                    randdir.add(coords);
+                }
+            }
+        }
+        for (int i = dir.size(); i > 0; i --){
             int rand = (int)(Math.random()*i);
             int[] coords = dir.remove(rand);
             randdir.add(coords);
