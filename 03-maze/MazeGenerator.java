@@ -27,6 +27,7 @@ public class MazeGenerator {
                 printMaze(maze);
                 wait(200);
             }
+            //if it's at the start, it only starts generating to one direction
             if (maze[row][col] == 'S'){
                 int[][] start = {{row+1,col},{row-1,col},{row,col+1},{row,col-1}};
                 for (int i = 0; i < start.length; i ++){
