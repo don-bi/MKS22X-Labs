@@ -10,15 +10,14 @@ public class MazeGenerator {
     public static void generate(char[][] maze,int row,int col){
         maze[row][col] = 'S';
         generate(maze, row, col, 0, 0, false);
-        addEnd(maze,row,col);
+        addEnd(maze, row, col);
     }
-
     public static void generateAnimate(char[][] maze,int row, int col){
         clearTerminal();
         generate(maze, row, col, 0, 0, true);
     }
     private static void generate(char[][] maze,int row, int col, int prevrow, int prevcol, boolean animate){
-        if (maze[row][col] == '#' && isValid(maze, row, col, prevrow, prevcol)){
+        if (maze[row][col] != ' ' && isValid(maze, row, col, prevrow, prevcol)){
             //System.out.println("passes: [" + row + ", " + col + "]");
             if (maze[row][col] != 'S'){
                 maze[row][col] = ' ';
@@ -28,10 +27,21 @@ public class MazeGenerator {
                 printMaze(maze);
                 wait(200);
             }
-            ArrayList<int[]> dir = makeDir(row, col);
-            for (int i = 0; i < dir.size(); i ++){
-                generate(maze, dir.get(i)[0], dir.get(i)[1], row, col, animate);
-            } 
+            if (maze[row][col] == 'S'){
+                int[][] start = {{row+1,col},{row-1,col},{row,col+1},{row,col-1}};
+                for (int i = 0; i < start.length; i ++){
+                    int r = start[i][0];
+                    int c = start[i][1];
+                    if (isValid(maze, r, c, 0, 0)){
+                        generate(maze, r, c, row, col, animate);
+                    }
+                }
+            } else {
+                ArrayList<int[]> dir = makeDir(row, col);
+                for (int i = 0; i < dir.size(); i ++){
+                    generate(maze, dir.get(i)[0], dir.get(i)[1], row, col, animate);
+                } 
+            }
         }
     }
 
@@ -40,25 +50,26 @@ public class MazeGenerator {
         int highestcount = 0;
         for (int i = 0; i < maze.length; i ++){
             for (int j = 0; j < maze[i].length; j ++){
-                if (maze[i][j] != '#'){
-                    maze[i][j] = 'E';
-                    if (solve(maze, row, col) > highestcount){
+                char[][] copy = copyMaze(maze);
+                if (copy[i][j] != '#'){
+                    copy[i][j] = 'E';
+                    int current = solve(copy, row, col);
+                    if (current > highestcount){
+                        highestcount = current;
                         furthest = new int[]{i,j};
                     }
-                    maze[i][j] = ' ';
                 }
             }
         }
         maze[furthest[0]][furthest[1]] = 'E';
     }
 
-    private int solve(char[][] maze, int row, int col){
+    private static int solve(char[][] maze, int row, int col){
         if (maze[row][col] != 'S' && maze[row][col] != ' '){
             if (maze[row][col] == 'E') return 0;
             return -1; 
         } else {
             maze[row][col] = '@';
- 
             int[][] dir = {{row+1,col},{row-1,col},{row,col+1},{row,col-1}};
             for (int i = 0; i < dir.length; i ++){
                 int s = solve(maze, dir[i][0],dir[i][1]);
@@ -144,5 +155,15 @@ public class MazeGenerator {
             }
             System.out.println();
         }
+    }
+
+    private static char[][] copyMaze(char[][] m){
+        char[][] mc = new char[m.length][m[0].length];
+        for (int i = 0; i < m.length; i ++){
+            for (int j = 0; j < m[i].length; j ++){
+                mc[i][j] = m[i][j];
+            }
+        }
+        return mc;
     }
 }
