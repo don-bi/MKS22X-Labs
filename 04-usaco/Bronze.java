@@ -21,9 +21,12 @@ public class Bronze {
                     field[i][j] = scan.nextInt();
                 }
             }
-            int Rs = scan.nextInt();
-            int Cs = scan.nextInt();
-            int Ds = scan.nextInt();
+            for (int times = 0; times < inputs; times ++){
+                int Rs = scan.nextInt();
+                int Cs = scan.nextInt();
+                int Ds = scan.nextInt();
+                stomp(field, Rs, Cs, Ds);
+            }
 
 
         } catch (FileNotFoundException e){
@@ -43,7 +46,7 @@ public class Bronze {
         }
     }
 
-    private static int findHighest(int f, int r, int c){
+    private static int findHighest(int[][] field, int r, int c){
         int highest = 0;
         for (int i = 0; i < 3; i ++){
             for (int j = 0; j < 3; j ++){
@@ -54,5 +57,17 @@ public class Bronze {
             }
         }
         return highest;
+    }
+
+    private static long depthFinder(int[][] field, int elevation){
+        long totaldeph = 0l;
+        for (int i = 0; i < field.length; i ++){
+            for (int j = 0; j < field[i].length; j ++){
+                if (field[i][j] < elevation){
+                    totaldeph += (elevation - field[i][j]);
+                }
+            }
+        }
+        return totaldeph * 72 * 72;
     }
 }
