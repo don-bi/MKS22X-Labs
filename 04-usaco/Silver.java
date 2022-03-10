@@ -3,9 +3,16 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Silver {
+    public static void main(String[] args) {
+        try{
+        System.out.println(solve("ctravel.in"));
+        }catch(FileNotFoundException e){
+            System.out.println("lol");
+        }
+    }
     public static long solve(String filename) throws FileNotFoundException{
         File file = new File(filename);
-        Scanner scan = new Scanner(filename);
+        Scanner scan = new Scanner(file);
         int r = scan.nextInt();
         int c = scan.nextInt();
         int[][] map = new int[r][c];
@@ -22,23 +29,31 @@ public class Silver {
         }
         int y1 = scan.nextInt();
         int x1 = scan.nextInt();
+        map[y1][x1] = 1;
+        for(int times = 0; times < t; times ++){
+            step(map);
+        }
         int y2 = scan.nextInt();
-        int x2 = scan.nextInt();    
+        int x2 = scan.nextInt();
+        return map[y2][x2];
     }
 
     private static void step(int[][] a){
         int[][] copy = copyMap(a);
+        //goes through every erea
         for (int i = 0; i < a.length; i ++){
             for (int j = 0; j < a[i].length; j ++){
                 int[][] dir = {{i+1,j},{i-1,j},{i,j+1},{i,j-1}};
+                //makes four direction of a square that is stepped on stepped on
                 if (copy[i][j] > 0){
                     for (int d = 0; d < dir.length; d ++){
                         int ycor = dir[d][0];
                         int xcor = dir[d][1];
                         if (copy[ycor][xcor] != -1){
-                            a[ycor][xcor]
+                            a[ycor][xcor] += copy[i][j];
                         }
                     }
+                    copy[i][j] = 0;
                 }
             }
         }
