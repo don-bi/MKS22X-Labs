@@ -22,8 +22,19 @@ public class Silver {
         int x1 = scan.nextInt();
         int y1 = scan.nextInt();
         int x2 = scan.nextInt();
-        int y2 = scan.nextInt();
+        int y2 = scan.nextInt();    
     }
 
+    private static void 
+
+    private static int[][] copyMap(int[][] a){
+        int[][] copy = new int[a.length][a[0].length];
+        for (int i = 0; i < a.length; i ++){
+            for (int j = 0; j < a[i].length; j ++){
+                copy[i][j] = a[i][j]; 
+            }
+        }
+        return copy;
+    }
 
 }
