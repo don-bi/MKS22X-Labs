@@ -17,6 +17,7 @@ public class Silver {
         int c = scan.nextInt();
         int[][] map = new int[r][c];
         int t = scan.nextInt();
+        scan.nextLine();
         for (int i = 0; i < r; i ++){
             String[] currentline = scan.nextLine().split("");
             for (int j = 0; j < currentline.length; j ++){
@@ -27,14 +28,19 @@ public class Silver {
                 }
             }
         }
-        int y1 = scan.nextInt();
-        int x1 = scan.nextInt();
+        int y1 = scan.nextInt()-1;
+        int x1 = scan.nextInt()-1;
         map[y1][x1] = 1;
         for(int times = 0; times < t; times ++){
+            clearTerminal();
             step(map);
+            gotoTop();
+            printar(map);
+            wait(2000);
         }
-        int y2 = scan.nextInt();
-        int x2 = scan.nextInt();
+        int y2 = scan.nextInt()-1;
+        int x2 = scan.nextInt()-1;
+        scan.close();
         return map[y2][x2];
     }
 
@@ -49,7 +55,7 @@ public class Silver {
                     for (int d = 0; d < dir.length; d ++){
                         int ycor = dir[d][0];
                         int xcor = dir[d][1];
-                        if (copy[ycor][xcor] != -1){
+                        if (inBounds(copy,ycor,xcor) && copy[ycor][xcor] != -1){
                             a[ycor][xcor] += copy[i][j];
                         }
                     }
@@ -69,4 +75,34 @@ public class Silver {
         return copy;
     }
 
+    public static void printar(int[][]a ){
+        for (int[] ar : a){
+            for (int n : ar){
+                System.out.print(n + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    private static boolean inBounds(int[][] map, int r,int c){
+        return r >= 0 && c >= 0 && r < map.length && c < map[0].length;
+    }
+
+    private static void wait(int millis){
+        try {
+        Thread.sleep(millis);
+        }
+        catch (InterruptedException e) {
+        }
+    }
+    
+    
+    public static void clearTerminal(){
+        //erase terminal
+        System.out.println("\033[2J");
+    }
+    public static void gotoTop(){
+        //go to top left of screen
+        System.out.println("\033[1;1H");
+    }
 }
