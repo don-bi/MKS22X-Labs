@@ -32,11 +32,11 @@ public class Silver {
         int x1 = scan.nextInt()-1;
         map[y1][x1] = 1;
         for(int times = 0; times < t; times ++){
-            clearTerminal();
+            //clearTerminal();
             step(map);
-            gotoTop();
+            /*gotoTop();
             printar(map);
-            wait(2000);
+            wait(2000);*/
         }
         int y2 = scan.nextInt()-1;
         int x2 = scan.nextInt()-1;
@@ -59,7 +59,7 @@ public class Silver {
                             a[ycor][xcor] += copy[i][j];
                         }
                     }
-                    copy[i][j] = 0;
+                    a[i][j] = 0;
                 }
             }
         }
