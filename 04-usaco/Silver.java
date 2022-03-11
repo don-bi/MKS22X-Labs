@@ -4,43 +4,46 @@ import java.util.Scanner;
 
 public class Silver {
     public static void main(String[] args) {
-        try{
-        System.out.println(solve("ctravel.in"));
-        }catch(FileNotFoundException e){
-            System.out.println("lol");
-        }
+        System.out.println(solve(args[0]));
     }
-    public static long solve(String filename) throws FileNotFoundException{
-        File file = new File(filename);
-        Scanner scan = new Scanner(file);
-        int r = scan.nextInt();
-        int c = scan.nextInt();
-        int[][] map = new int[r][c];
-        int t = scan.nextInt();
-        scan.nextLine();
-        for (int i = 0; i < r; i ++){
-            String[] currentline = scan.nextLine().split("");
-            for (int j = 0; j < currentline.length; j ++){
-                if (currentline[j].equals("*")){
-                    map[i][j] = -1;
-                } else {
-                    map[i][j] = 0;
+    public static long solve(String filename){
+        int[][] map = new int[0][0];
+        int y2 = 0;
+        int x2 = 0;
+        try{
+            File file = new File(filename);
+            Scanner scan = new Scanner(file);
+            int r = scan.nextInt();
+            int c = scan.nextInt();
+            map = new int[r][c];
+            int t = scan.nextInt();
+            scan.nextLine();
+            for (int i = 0; i < r; i ++){
+                String[] currentline = scan.nextLine().split("");
+                for (int j = 0; j < currentline.length; j ++){
+                    if (currentline[j].equals("*")){
+                        map[i][j] = -1;
+                    } else {
+                        map[i][j] = 0;
+                    }
                 }
             }
+            int y1 = scan.nextInt()-1;
+            int x1 = scan.nextInt()-1;
+            map[y1][x1] = 1;
+            for(int times = 0; times < t; times ++){
+                //clearTerminal();
+                step(map);
+                /*gotoTop();
+                printar(map);
+                wait(2000);*/
+            }
+            y2 = scan.nextInt()-1;
+            x2 = scan.nextInt()-1;
+            scan.close();
+        } catch (FileNotFoundException e){
+            System.out.println("no file");
         }
-        int y1 = scan.nextInt()-1;
-        int x1 = scan.nextInt()-1;
-        map[y1][x1] = 1;
-        for(int times = 0; times < t; times ++){
-            //clearTerminal();
-            step(map);
-            /*gotoTop();
-            printar(map);
-            wait(2000);*/
-        }
-        int y2 = scan.nextInt()-1;
-        int x2 = scan.nextInt()-1;
-        scan.close();
         return map[y2][x2];
     }
 
