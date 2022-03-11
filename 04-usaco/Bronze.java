@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Bronze {
     public static void main(String[] args) {
-        System.out.println(solve("makelake.in"));
+        System.out.println(solve(args[0]));
     }
 
     public static long solve(String filename){
