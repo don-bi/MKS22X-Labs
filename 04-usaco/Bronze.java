@@ -31,7 +31,7 @@ public class Bronze {
             }
             scan.close();
         } catch (FileNotFoundException e){
-            System.out.println("lol");
+            return -1;
         }
         return depthFinder(field, elevation);
     }
