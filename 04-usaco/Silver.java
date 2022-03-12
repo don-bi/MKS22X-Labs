@@ -42,7 +42,7 @@ public class Silver {
             x2 = scan.nextInt()-1;
             scan.close();
         } catch (FileNotFoundException e){
-            System.out.println("no file");
+            return -1;
         }
         return map[y2][x2];
     }
