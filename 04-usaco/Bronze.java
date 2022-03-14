@@ -8,14 +8,14 @@ public class Bronze {
     }
 
     public static long solve(String filename){
-        int[][] field = new int[0][0];
+        long[][] field = new long[0][0];
         int elevation = 0;
         try {
             File file = new File(filename);
             Scanner scan = new Scanner(file);
             int r = scan.nextInt();
             int c = scan.nextInt();
-            field = new int[r][c];
+            field = new long[r][c];
             elevation = scan.nextInt();
             int inputs = scan.nextInt();
             for (int i=0; i < r; i++){
@@ -31,13 +31,13 @@ public class Bronze {
             }
             scan.close();
         } catch (FileNotFoundException e){
-            System.out.println("lol");
+            return -1;
         }
         return depthFinder(field, elevation);
     }
 
-    private static void stomp(int[][] field, int r, int c, int d){
-        int num = findHighest(field, r, c) - d;
+    private static void stomp(long[][] field, int r, int c, int d){
+        long num = findHighest(field, r, c) - d;
         for (int i = 0; i < 3; i ++){
             for (int j = 0; j < 3; j ++){
                 if (field[r+i][j+c] > num){
@@ -47,11 +47,11 @@ public class Bronze {
         }
     }
 
-    private static int findHighest(int[][] field, int r, int c){
-        int highest = 0;
+    private static long findHighest(long[][] field, int r, int c){
+        long highest = 0;
         for (int i = 0; i < 3; i ++){
             for (int j = 0; j < 3; j ++){
-                int current = field[r+i][c+j];
+                long current = field[r+i][c+j];
                 if (current > highest){
                     highest = current;
                 }
@@ -60,7 +60,7 @@ public class Bronze {
         return highest;
     }
 
-    private static long depthFinder(int[][] field, int elevation){
+    private static long depthFinder(long[][] field, int elevation){
         long totaldeph = 0l;
         for (int i = 0; i < field.length; i ++){
             for (int j = 0; j < field[i].length; j ++){
@@ -71,9 +71,9 @@ public class Bronze {
         }
         return totaldeph * 72 * 72;
     }
-    public static void printar(int[][]a ){
-        for (int[] ar : a){
-            for (int n : ar){
+    public static void printar(long[][]a ){
+        for (long[] ar : a){
+            for (long n : ar){
                 System.out.print(n + " ");
             }
             System.out.println();
