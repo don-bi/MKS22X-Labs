@@ -7,7 +7,7 @@ public class Silver {
         System.out.println(solve(args[0]));
     }
     public static long solve(String filename){
-        int[][] map = new int[0][0];
+        long[][] map = new long[0][0];
         int y2 = 0;
         int x2 = 0;
         try{
@@ -15,7 +15,7 @@ public class Silver {
             Scanner scan = new Scanner(file);
             int r = scan.nextInt();
             int c = scan.nextInt();
-            map = new int[r][c];
+            map = new long[r][c];
             int t = scan.nextInt();
             scan.nextLine();
             for (int i = 0; i < r; i ++){
@@ -47,8 +47,8 @@ public class Silver {
         return map[y2][x2];
     }
 
-    private static void step(int[][] a){
-        int[][] copy = copyMap(a);
+    private static void step(long[][] a){
+        long[][] copy = copyMap(a);
         //goes through every erea
         for (int i = 0; i < a.length; i ++){
             for (int j = 0; j < a[i].length; j ++){
@@ -68,8 +68,8 @@ public class Silver {
         }
     }
 
-    private static int[][] copyMap(int[][] a){
-        int[][] copy = new int[a.length][a[0].length];
+    private static long[][] copyMap(long[][] a){
+        long[][] copy = new long[a.length][a[0].length];
         for (int i = 0; i < a.length; i ++){
             for (int j = 0; j < a[i].length; j ++){
                 copy[i][j] = a[i][j]; 
@@ -87,7 +87,7 @@ public class Silver {
         }
     }
 
-    private static boolean inBounds(int[][] map, int r,int c){
+    private static boolean inBounds(long[][] map, int r,int c){
         return r >= 0 && c >= 0 && r < map.length && c < map[0].length;
     }
 
