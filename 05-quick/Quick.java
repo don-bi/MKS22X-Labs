@@ -12,10 +12,10 @@ public class Quick {
         //sorted(ary): {0, 2, 5, 10, 15, 23}
         int[]ary = new int[20];
         for (int i = 0; i < ary.length; i ++) {
-            ary[i] = (int)(Math.random()*20);
+            ary[i] = (int)(Math.random()*8);
         }
         System.out.println(Arrays.toString(ary));
-        quicksort(ary);
+        System.out.println("pivots: " + Arrays.toString(partitionDutch(ary,0,ary.length-1)));
         System.out.println(Arrays.toString(ary));
     }
     public static int partition ( int [] data, int start, int end){
@@ -90,6 +90,36 @@ public class Quick {
             quicksort(data,lo,p-1);
             quicksort(data,p+1,hi);
         }
+    }
+
+    public static int[] partitionDutch(int[] data,int lo, int hi){
+        int lt = lo;
+        int i = lo+1;
+        int rt = hi;
+        //random value to beginning
+        int rand = (int)(Math.random()*(hi-lo+1))+lo;
+        int temp = data[lo];
+        data[lo] = data[rand];
+        data[rand] = temp;
+
+        while (i <= rt){
+            if (data[i] < data[lt]){
+                temp = data[i];
+                data[i] = data[lt];
+                data[lt] = temp;
+                lt++;
+                i++;
+            } else if (data[i] > data[lt]){
+                temp = data[i];
+                data[i] = data[rt];
+                data[rt] = temp;
+                rt--;
+            } else {
+                i++;
+            }
+        }
+        return new int[]{lt,rt};
+
     }
 
 }
