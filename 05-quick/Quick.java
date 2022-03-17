@@ -1,22 +1,17 @@
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class Quick {
     public static void main(String[] args) {
-        /*int [] data = new int[] {997,998,999,4,3,2,1,0};
-        System.out.println("Original: "+Arrays.toString(data));
-        int pivot = partition( data , 3, 7);
-        System.out.println("Pivot value: "+data[pivot]+ ", Pivot index: "+pivot);
-        System.out.println("Modified: "+Arrays.toString(data));
-        System.out.println();*/
-        //sorted(ary): {0, 2, 5, 10, 15, 23}
-        int[]ary = new int[20];
+        int[][]ary = new int[100000][32];
         for (int i = 0; i < ary.length; i ++) {
-            ary[i] = (int)(Math.random()*8);
+            for (int j = 0; j < ary[i].length; j ++){
+                ary[i][j] = (int)(Math.random()*1000);
+            }
         }
-        System.out.println(Arrays.toString(ary));
-        System.out.println("pivots: " + Arrays.toString(partitionDutch(ary,0,ary.length-1)));
-        System.out.println(Arrays.toString(ary));
+        //System.out.println("pivots: " + Arrays.toString(partitionDutch(ary,0,ary.length-1)));
+        for (int i = 0; i < ary.length; i ++){
+            quicksort(ary[i]);
+        }
     }
     public static int partition ( int [] data, int start, int end){
         int rand = (int)(Math.random()*(end-start+1))+start;
@@ -85,10 +80,12 @@ public class Quick {
       
     public static void quicksort(int[]data,int lo,int hi){
         //your code.
-        if (lo < hi){
-            int p = partition(data, lo, hi);
-            quicksort(data,lo,p-1);
-            quicksort(data,p+1,hi);
+        if (hi - lo < 32){
+            insertionSort(data, lo, hi);
+        } else if (lo < hi){
+            int[] p = partitionDutch(data, lo, hi);
+            quicksort(data,lo,p[0]-1);
+            quicksort(data,p[1]+1,hi);
         }
     }
 
@@ -121,5 +118,22 @@ public class Quick {
         return new int[]{lt,rt};
 
     }
+    public static void insertionSort(int[]data, int start, int end) {
+        /*Your implementation here*/
+        for (int i = start+1; i < end; i ++) {
+          //System.out.print(Arrays.toString(data));
+          int temp = data[i];
+          int predIndex = i - 1;
+          while (predIndex != -1 && data[i] < data[predIndex]) {
+            predIndex --;
+          }
+          predIndex ++;
+          //System.out.println(predIndex + " " + i);
+          for (int k = i; k > predIndex; k --) {
+            data[k] = data[k - 1];
+          }
+          data[predIndex] = temp;
+        }
+       }
 
 }
