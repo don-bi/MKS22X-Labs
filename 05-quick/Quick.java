@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class Quick {
     public static void main(String[] args) {
-        int[][]ary = new int[100000][32];
+        int[][]ary = new int[100000][500];
         for (int i = 0; i < ary.length; i ++) {
             for (int j = 0; j < ary[i].length; j ++){
                 ary[i][j] = (int)(Math.random()*1000);
@@ -81,7 +81,7 @@ public class Quick {
     public static void quicksort(int[]data,int lo,int hi){
         //your code.
         if (hi - lo < 32){
-            insertionSort(data, lo, hi);
+            insertionSort(data, lo, hi+1);
         } else if (lo < hi){
             int[] p = partitionDutch(data, lo, hi);
             quicksort(data,lo,p[0]-1);
@@ -134,6 +134,6 @@ public class Quick {
           }
           data[predIndex] = temp;
         }
-       }
+    }
 
 }
