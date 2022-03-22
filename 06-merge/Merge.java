@@ -59,4 +59,31 @@ public class Merge {
             return data;
         }
       }
+
+      public static int[] mergesortH(int[] data, int[] temp){
+
+      }
+      public static void merge(int[]destination,int[]temp,int leftIndex,int rightIndex,int middleIndex){
+        for (int i = 0; i < destination.length; i ++){
+            if (leftIndex >= middleIndex){
+                destination[i] = temp[rightIndex];
+                rightIndex --;
+            } else if (rightIndex >= middleIndex){
+                destination[i] = temp[leftIndex];
+                leftIndex ++;
+            } else if (temp[leftIndex] < temp[rightIndex]){
+                destination[i] = temp[leftIndex];
+                leftIndex ++;
+            } else if (temp[leftIndex] > temp[rightIndex]){
+                destination[i] = temp[rightIndex];
+                rightIndex --;
+            } else {
+                destination[i] = temp[leftIndex];
+                leftIndex ++;
+            }
+        }
+        return temp;    
+      }
+
+      
 }
