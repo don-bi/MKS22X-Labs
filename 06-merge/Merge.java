@@ -2,9 +2,13 @@ import java.util.Arrays;
 
 public class Merge {
     public static void main(String[] args) {
-        int[] one = {2,2,2,3,6,7};
-        int[] two = {1,2,3,5,8,10};
-        System.out.println(Arrays.toString(merge(one,two)));
+        int[] one = {2};
+        int[] two = {1};
+        int[] test = {2,3,24,1,6,8,3,2,5,6};
+        mergesort(test);
+        System.out.println(Arrays.toString(test));
+        System.out.println(Arrays.toString(merge(one, two)));
+        
     }
     public static int [] merge(int [] left, int[] right){
         //return a new array that is the merged version of left and right
@@ -32,16 +36,27 @@ public class Merge {
         return temp;
       }
 
-      /*public static void mergesort(int [] data){
-        int [] temp  =  mergeSortH(data);
-        copy temp into data
+      public static void mergesort(int [] data){
+        int [] temp = mergesortH(data);
+        for (int i = 0; i < data.length; i ++){
+            data[i] = temp[i];
+        }
       }
 
       public static int[] mergesortH(int [] data){
-        if more than 1 element{
-          left = copy half of data
-          right = copy other half of data
-          sort each half and merge them together
+        if (data.length > 1){
+          int[] left = new int[data.length/2];
+          int[] right = new int [data.length-left.length];
+          for (int i = 0; i < data.length; i++){
+              if (i < left.length){
+                  left[i] = data[i];
+              } else {
+                  right[i-left.length] = data[i]; 
+              }
+          }
+          return merge(mergesortH(left), mergesortH(right));
+        } else {
+            return data;
         }
-      }*/
+      }
 }
