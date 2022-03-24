@@ -8,8 +8,12 @@ public class Merge {
         mergesort(test);
         System.out.println(Arrays.toString(test));
         System.out.println(Arrays.toString(merge(one, two)));
-        
+        int[] data = {1,2,3,4,5,6,7,8,9,10};
+        int[] temp = {1,2,3,4,5,5,4,3,2,1};
+        merge(data,temp,0,9,4);
+        System.out.println(Arrays.toString(data));
     }
+    
     public static int [] merge(int [] left, int[] right){
         //return a new array that is the merged version of left and right
         int[] temp = new int[left.length + right.length];
@@ -60,15 +64,16 @@ public class Merge {
         }
       }
 
-      public static int[] mergesortH(int[] data, int[] temp){
+      /*public static int[] mergesortH(int[] data, int[] temp){
+        if (leftIndex == )
+      }*/
 
-      }
       public static void merge(int[]destination,int[]temp,int leftIndex,int rightIndex,int middleIndex){
         for (int i = 0; i < destination.length; i ++){
-            if (leftIndex >= middleIndex){
+            if (leftIndex > middleIndex){
                 destination[i] = temp[rightIndex];
                 rightIndex --;
-            } else if (rightIndex >= middleIndex){
+            } else if (rightIndex <= middleIndex){
                 destination[i] = temp[leftIndex];
                 leftIndex ++;
             } else if (temp[leftIndex] < temp[rightIndex]){
@@ -81,8 +86,8 @@ public class Merge {
                 destination[i] = temp[leftIndex];
                 leftIndex ++;
             }
+            //System.out.println(Arrays.toString(destination) + leftIndex + ";" + rightIndex + ";" + middleIndex);
         }
-        return temp;    
       }
 
       
