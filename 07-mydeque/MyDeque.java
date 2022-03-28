@@ -22,8 +22,19 @@ public class MyDeque<E>{
         size = 0;
     }
 
-    public int size(){ }
-    public String toString(){ }
+    public int size(){ 
+        return size;
+    }
+    public String toString(){ 
+        String s = "[";
+        for (int i = start; i <= end; i ++){
+            s += data[i];
+            if (i != end){
+                s += ", ";
+            }
+        }
+        return s + "]";
+    }
     public void addFirst(E element){ }
     public void addLast(E element){ }
     public E removeFirst(){ }
@@ -32,6 +43,17 @@ public class MyDeque<E>{
     public E getLast(){ }
 
     private void reisze(){
-
+        @SuppressWarnings("unchecked")
+        E[] d = (E[])new Object[data.length*2+1];
+        start = d.length/2;
+        int i = start;
+        for (int times = 0; times < data.length; times ++){
+            if (i > data.length){
+                i = 0;
+            }
+            d[start+times] = data[i];
+            end = start + times;
+        }
+        data = d;
     }
-  }
+}
