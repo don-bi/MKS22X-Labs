@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class MyDeque<E>{
     private E[] data;
     private int size;
@@ -46,31 +48,55 @@ public class MyDeque<E>{
             start = data.length;
         }
         if (size() == 0){
-            data[0] = element;
+            data[start] = element;
+            size++;
         } else {
             start--;
             data[start] = element;
+            size++;
         }
-
     }
-    public void addLast(E element){ }
-    public E removeFirst(){ }
-    public E removeLast(){ }
-    public E getFirst(){ }
-    public E getLast(){ }
+    public void addLast(E element){ 
+        if (element == null){
+            throw new NullPointerException();
+        }
+        if (size() == data.length){
+            reisze();
+        }
+        if (end == data.length-1){
+            end = -1;
+        }
+        if (size() == 0){
+            data[end] = element;
+            size++;
+        } else {
+            end++;
+            data[end] = element;
+            size++;
+        }
+    }
+    //public E removeFirst(){ }
+    //public E removeLast(){ }
+    //public E getFirst(){ }
+    //public E getLast(){ }
 
     private void reisze(){
         @SuppressWarnings("unchecked")
         E[] d = (E[])new Object[data.length*2+1];
-        start = d.length/2;
         int i = start;
+        start = (d.length - data.length)/2;
         for (int times = 0; times < data.length; times ++){
-            if (i > data.length){
+            if (i >= data.length){
                 i = 0;
             }
             d[start+times] = data[i];
+            i++;
             end = start + times;
         }
         data = d;
+    }
+
+    public void printDebug(){
+        System.out.println(Arrays.toString(data));
     }
 }
