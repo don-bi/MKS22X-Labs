@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 public class MyDeque<E>{
     private E[] data;
@@ -81,24 +82,32 @@ public class MyDeque<E>{
         }
     }
     public E removeFirst(){ 
-        E temp = data[start];
-        data[start] = null;
-        start++;
-        size--;
-        if (start == data.length){
-            start = 0;
+        if (size() == 0){
+            throw new NoSuchElementException();
+        } else {
+            E temp = data[start];
+            data[start] = null;
+            start++;
+            size--;
+            if (start == data.length){
+                start = 0;
+            }
+            return temp;
         }
-        return temp;
     }
     public E removeLast(){
-        E temp = data[end];
-        data[end] = null;
-        end--;
-        size--;
-        if (end == -1){
-            end = data.length-1;
+        if (size() == 0){
+            throw new NoSuchElementException();
+        } else {
+            E temp = data[end];
+            data[end] = null;
+            end--;
+            size--;
+            if (end == -1){
+                end = data.length-1;
+            }
+            return temp;
         }
-        return temp;
     }
     public E getFirst(){
         return data[start];
