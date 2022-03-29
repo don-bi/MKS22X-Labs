@@ -29,11 +29,16 @@ public class MyDeque<E>{
     }
     public String toString(){ 
         String s = "[";
-        for (int i = start; i <= end; i ++){
+        int i = start;
+        for (int times = 0; times < size(); times ++){
+            if (i >= data.length){
+                i = 0;
+            }
             s += data[i];
             if (i != end){
                 s += ", ";
             }
+            i++;
         }
         return s + "]";
     }
