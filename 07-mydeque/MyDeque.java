@@ -75,8 +75,26 @@ public class MyDeque<E>{
             size++;
         }
     }
-    //public E removeFirst(){ }
-    //public E removeLast(){ }
+    public E removeFirst(){ 
+        E temp = data[start];
+        data[start] = null;
+        start++;
+        size--;
+        if (start == data.length){
+            start = 0;
+        }
+        return temp;
+    }
+    public E removeLast(){
+        E temp = data[end];
+        data[end] = null;
+        end--;
+        size--;
+        if (end == -1){
+            end = data.length-1;
+        }
+        return temp;
+    }
     //public E getFirst(){ }
     //public E getLast(){ }
 
