@@ -20,7 +20,7 @@ public class MyDeque<E>{
         E[] d = (E[])new Object[initialCapacity];
         data = d;
         start = data.length/2;
-        end = start + 1;
+        end = data.length/2;
         size = 0;
     }
 
@@ -113,7 +113,7 @@ public class MyDeque<E>{
         int i = start;
         start = (d.length - data.length)/2;
         for (int times = 0; times < data.length; times ++){
-            if (i >= data.length){
+            if (i == data.length){
                 i = 0;
             }
             d[start+times] = data[i];
