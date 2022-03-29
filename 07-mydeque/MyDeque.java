@@ -35,7 +35,15 @@ public class MyDeque<E>{
         }
         return s + "]";
     }
-    public void addFirst(E element){ }
+    public void addFirst(E element){ 
+        if (element == null){
+            throw new NullPointerException();
+        }
+        if (size() == data.length){
+            reisze();
+        }
+        
+    }
     public void addLast(E element){ }
     public E removeFirst(){ }
     public E removeLast(){ }
