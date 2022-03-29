@@ -9,7 +9,7 @@ public class MyDeque<E>{
         E[] d = (E[])new Object[10];
         data = d;
         start = data.length/2;
-        end = start + 1;
+        end = data.length/2;
         size = 0;
     }
 
@@ -42,7 +42,16 @@ public class MyDeque<E>{
         if (size() == data.length){
             reisze();
         }
-        
+        if (start == 0){
+            start = data.length;
+        }
+        if (size() == 0){
+            data[0] = element;
+        } else {
+            start--;
+            data[start] = element;
+        }
+
     }
     public void addLast(E element){ }
     public E removeFirst(){ }
