@@ -54,6 +54,9 @@ public class MyDeque<E>{
             start = data.length;
         }
         if (size() == 0){
+            if (start == data.length){
+                start = 0;
+            }
             data[start] = element;
             size++;
         } else {
@@ -73,6 +76,9 @@ public class MyDeque<E>{
             end = -1;
         }
         if (size() == 0){
+            if (end == -1){
+                end = data.length-1;
+            }
             data[end] = element;
             size++;
         } else {
@@ -87,8 +93,10 @@ public class MyDeque<E>{
         } else {
             E temp = data[start];
             data[start] = null;
-            start++;
             size--;
+            if (size != 0){
+                start++;
+            }
             if (start == data.length){
                 start = 0;
             }
@@ -101,8 +109,10 @@ public class MyDeque<E>{
         } else {
             E temp = data[end];
             data[end] = null;
-            end--;
             size--;
+            if (size != 0){
+                end--;
+            }
             if (end == -1){
                 end = data.length-1;
             }
@@ -110,15 +120,23 @@ public class MyDeque<E>{
         }
     }
     public E getFirst(){
-        return data[start];
+        if (size() == 0){
+            throw new NoSuchElementException();
+        } else {
+            return data[start];
+        }
     }
     public E getLast(){ 
-        return data[end];
+        if (size() == 0){
+            throw new NoSuchElementException();
+        } else {
+            return data[end];
+        }
     }
 
     private void reisze(){
         @SuppressWarnings("unchecked")
-        E[] d = (E[])new Object[data.length*2+1];
+        E[] d = (E[])new Object[data.length*2+3];
         int i = start;
         start = (d.length - data.length)/2;
         for (int times = 0; times < data.length; times ++){
