@@ -139,6 +139,9 @@ public class MyDeque<E>{
         E[] d = (E[])new Object[data.length*2+3];
         int i = start;
         start = (d.length - data.length)/2;
+        if (data.length == 0){
+            end = start;
+        }
         for (int times = 0; times < data.length; times ++){
             if (i == data.length){
                 i = 0;
@@ -151,6 +154,6 @@ public class MyDeque<E>{
     }
 
     public void printDebug(){
-        System.out.println(Arrays.toString(data));
+        System.out.println(Arrays.toString(data) + "start: " + start + " end: " + end);
     }
 }
