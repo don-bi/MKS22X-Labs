@@ -17,15 +17,21 @@ public class Calculator {
             if (scan.hasNextDouble()){
                 stack.addFirst(scan.nextDouble());
             } else {
+                char operator = scan.next().charAt(0);
+                if (stack.size() < 2){
+                    throw new IllegalArgumentException("too few operands for operation " + operator);
+                }
                 double op2 = stack.removeFirst();
                 double op1 = stack.removeFirst();
-                char operator = scan.next().charAt(0);
                 if (operator == '+') stack.addFirst(op1 + op2);
                 if (operator == '-') stack.addFirst(op1 - op2);
                 if (operator == '/') stack.addFirst(op1 / op2);
                 if (operator == '*') stack.addFirst(op1 * op2);
                 if (operator == '%') stack.addFirst(op1 % op2);
             }
+        }
+        if (stack.size() > 1){
+            throw new IllegalArgumentException("too many operands");
         }
         return stack.getLast();
     }
