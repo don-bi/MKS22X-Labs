@@ -23,11 +23,28 @@ public class Calculator {
                 }
                 double op2 = stack.removeFirst();
                 double op1 = stack.removeFirst();
-                if (operator == '+') stack.addFirst(op1 + op2);
+                /*if (operator == '+') stack.addFirst(op1 + op2);
                 if (operator == '-') stack.addFirst(op1 - op2);
                 if (operator == '/') stack.addFirst(op1 / op2);
                 if (operator == '*') stack.addFirst(op1 * op2);
-                if (operator == '%') stack.addFirst(op1 % op2);
+                if (operator == '%') stack.addFirst(op1 % op2);*/
+                switch (operator) {
+                    case '+': 
+                        stack.addFirst(op1 + op2);
+                        break;
+                    case '-':
+                        stack.addFirst(op1 - op2);
+                        break;
+                    case '/':
+                        stack.addFirst(op1 / op2);
+                        break;
+                    case '*':
+                        stack.addFirst(op1 * op2);
+                        break;
+                    case '%':
+                        stack.addFirst(op1 % op2);
+
+                }
             }
         }
         if (stack.size() > 1){
