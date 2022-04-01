@@ -49,6 +49,8 @@ public class Calculator {
         }
         if (stack.size() > 1){
             throw new IllegalArgumentException("too many operands");
+        } else if (stack.size() == 0){
+            throw new IllegalArgumentException("too few operands");
         }
         return stack.getLast();
     }
