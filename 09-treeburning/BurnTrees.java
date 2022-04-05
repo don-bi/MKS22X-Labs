@@ -28,8 +28,27 @@ public class BurnTrees{
     ticks++;//leave this here.
     //YOU MUST IMPLEMENT THE REST OF THIS METHOD
     //(BEFORE WRITING ANY CODE READ ALL OF THE CODE AND SEE HOW IT FITS TOGETHER)
+    for (int burn = 0; burn < firecount; burn ++){
+        int[] coords = frontier.remove();
+        int r = coords[0];
+        int c = coords[1];
+        map[r][c] = ASH;
+        int[][] directions = {{r+1,c},{r-1,c},{r,c+1},{r,c-1}};
+        for (int i = 0; i < 4; i ++){
+            int newr = directions[i][0];
+            int newc = directions[i][1];
+            if (inbounds(newr,newc) && map[newr][newc] == TREE){
+                map[newr][newc] = FIRE;
+                forntier.add(new int[]{newr, newc});
+                firecount++;
+            }
+        }
+    }
   }
 
+  private boolean inbounds(int r,int c){
+      return r >= 0 && r < map.length && c >= 0 && c < map[0].length;
+  }
   /***********************YOU MIGHT UPDATE THIS**************************/
 
   /*Initialize the simulation.
