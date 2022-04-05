@@ -7,7 +7,8 @@ public class BurnTrees{
   private static final int ASH = 3;
   private static final int SPACE = 0;
   private Queue<int[]> frontier;
-  private int firecount;  
+  private int firecount;
+  private int tempfirecount;  
 
   /*Determine if the simulation is still burning
    *@return false if any fires are still burning, true otherwise
@@ -39,11 +40,13 @@ public class BurnTrees{
             int newc = directions[i][1];
             if (inbounds(newr,newc) && map[newr][newc] == TREE){
                 map[newr][newc] = FIRE;
-                forntier.add(new int[]{newr, newc});
-                firecount++;
+                frontier.add(new int[]{newr, newc});
+                tempfirecount++;
             }
         }
     }
+    firecount = tempfirecount;
+    tempfirecount = 0;
   }
 
   private boolean inbounds(int r,int c){
@@ -66,6 +69,7 @@ public class BurnTrees{
      }
      frontier = new ArrayDeque<int[]>();
      firecount = 0;
+     tempfirecount = 0;
      start();//set the left column on fire.
   }
 
