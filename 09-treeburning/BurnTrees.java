@@ -196,5 +196,43 @@ public class BurnTrees{
     return getTicks();
   }
 
+  //Stats stuff
+  public static double averageOfNRuns(int n, double density, int size){
+    double[] runs = new double[n];
+    for (int iter = 0; iter < n; iter ++ ){
+        BurnTrees b = new BurnTrees(size, size, density);
+        runs[iter] = b.run();
+    }
+    double sum = 0;
+    for (int i = 0; i < runs.length; i ++){
+        sum += runs[i];
+    }
+    return sum/n;
+}
+
+public static void printTable(){
+    int[] reps = {50};
+    int[] sizes = {100};
+    String s = "";
+    for (int rep : reps){
+        for (int size : sizes){
+            Hashtable<Double,Double> data = new Hashtable<Double,Double>();
+            s += rep + " repititions " + size + " x " + size + " table\n\n";
+            s += "density\t|\tticks\n";
+            s += "-------------------------\n";
+            double density = 0.0;
+            while (density <= 1){
+                Double avg = averageOfNRuns(rep, density, size);
+                String avgst = String.format("%.2f",avg);
+                s += String.format("%.2f",density) + "\t|\t" + avgst + "\n";
+                density += 0.05;
+                data.put(density, avg);
+            }
+            s += "\n\n\n";
+        }
+    }
+    System.out.println(s);
+}
+
 
 }
