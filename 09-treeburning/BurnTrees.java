@@ -224,7 +224,7 @@ public static void printTable(){
             s += "density\t|\tticks\n";
             s += "-------------------------\n";
             double density = 0.0;
-            while (density <= 1.03){
+            while (density <= 1){
                 Double avg = averageOfNRuns(rep, density, size);
                 String avgst = String.format("%.2f",avg);
                 s += String.format("%.2f",density) + "\t|\t" + avgst + "\n";
