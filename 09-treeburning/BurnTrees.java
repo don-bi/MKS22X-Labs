@@ -7,8 +7,7 @@ public class BurnTrees{
   private static final int ASH = 3;
   private static final int SPACE = 0;
   private Queue<int[]> frontier;
-  private int firecount;
-  private int tempfirecount;  
+  private int firecount; 
 
   /*Determine if the simulation is still burning
    *@return false if any fires are still burning, true otherwise
@@ -29,6 +28,7 @@ public class BurnTrees{
     ticks++;//leave this here.
     //YOU MUST IMPLEMENT THE REST OF THIS METHOD
     //(BEFORE WRITING ANY CODE READ ALL OF THE CODE AND SEE HOW IT FITS TOGETHER)
+    int tempfirecount = 0;
     for (int burn = 0; burn < firecount; burn ++){
         int[] coords = frontier.remove();
         int r = coords[0];
@@ -46,7 +46,6 @@ public class BurnTrees{
         }
     }
     firecount = tempfirecount;
-    tempfirecount = 0;
   }
 
   private boolean inbounds(int r,int c){
@@ -69,7 +68,6 @@ public class BurnTrees{
      }
      frontier = new ArrayDeque<int[]>();
      firecount = 0;
-     tempfirecount = 0;
      start();//set the left column on fire.
   }
 
@@ -92,23 +90,27 @@ public class BurnTrees{
 
 
     public static void main(String[]args){
-      int WIDTH = 20;
-      int HEIGHT = 20;
-      int DELAY = 200;
-      double DENSITY = .7;
-      if(args.length > 1){
-        WIDTH = Integer.parseInt(args[0]);
-        HEIGHT = Integer.parseInt(args[1]);
-        DENSITY = Double.parseDouble(args[2]);
-      }
-      if(args.length > 3){
-        DELAY = Integer.parseInt(args[3]);
-      }
-      BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
+      if(args.length == 0){
+        printTable();
+      } else {
+        int WIDTH = 20;
+        int HEIGHT = 20;
+        int DELAY = 200;
+        double DENSITY = .7;
+        if(args.length > 1){
+          WIDTH = Integer.parseInt(args[0]);
+          HEIGHT = Integer.parseInt(args[1]);
+          DENSITY = Double.parseDouble(args[2]);
+        }
+        if(args.length > 3){
+          DELAY = Integer.parseInt(args[3]);
+        }
+        BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
 
 
-      int ans = b.animate(DELAY);//animate all screens
-      System.out.println(ans);//print the final answer
+        int ans = b.animate(DELAY);//animate all screens
+        System.out.println(ans);//print the final answer
+      }
 
       //int ans = b.outputAll();//print all screens one after another
       //System.out.println(ans);//print the final answer
@@ -211,9 +213,10 @@ public class BurnTrees{
 }
 
 public static void printTable(){
-    int[] reps = {50};
-    int[] sizes = {100};
+    int[] reps = {25};
+    int[] sizes = {500};
     String s = "";
+    String s2 = "";
     for (int rep : reps){
         for (int size : sizes){
             Hashtable<Double,Double> data = new Hashtable<Double,Double>();
@@ -221,7 +224,7 @@ public static void printTable(){
             s += "density\t|\tticks\n";
             s += "-------------------------\n";
             double density = 0.0;
-            while (density <= 1){
+            while (density <= 1.03){
                 Double avg = averageOfNRuns(rep, density, size);
                 String avgst = String.format("%.2f",avg);
                 s += String.format("%.2f",density) + "\t|\t" + avgst + "\n";
@@ -229,9 +232,24 @@ public static void printTable(){
                 data.put(density, avg);
             }
             s += "\n\n\n";
+            //below is 1% increments at maximum areas
+            s2 += rep + " repititions " + size + " x " + size + " table\n\n";
+            s2 += "density\t|\tticks\n";
+            s2 += "-------------------------\n";
+            density = 0.55;
+            while (density <= 0.65){
+                Double avg = averageOfNRuns(rep, density, size);
+                String avgst = String.format("%.2f",avg);
+                s2 += String.format("%.2f",density) + "\t|\t" + avgst + "\n";
+                density += 0.01;
+                data.put(density, avg);
+            }
+            s2 += "\n\n\n";
+
         }
     }
-    System.out.println(s);
+    System.out.println(Text.CLEAR_SCREEN);
+    System.out.println(Text.go(1,1)+s+s2);
 }
 
 
