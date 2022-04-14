@@ -46,6 +46,8 @@ public class Orb{
     //make sure it is the correct color
     //make sure you read the parameters of ellipse, so that you have the correct size.
     //radius is NOT one of the parameters of ellipse by default.
+    fill(c);
+    ellipse(x,y,radius,radius);
   }
 
   void move(){
