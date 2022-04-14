@@ -10,7 +10,7 @@ void mouseClicked() {
   //the xSpeed and ySpeed should be in the range [-3.0,3.0)
   float mX = mouseX;
   float mY = mouseY;
-  orbList.add(new Orb(mX,mY,50,2,2));
+  orbList.add(new Orb(mX,mY,2,2,50));
 }
 void draw() {
   background(255);
@@ -54,15 +54,21 @@ public class Orb{
     //PART 2
     //change the x based on the xSpeed
     //change the y based on the ySpeed
-
+    x += xSpeed;
+    y += ySpeed;
     //PART 3
     //Change the speed when you collide with the end of the screen (all 4 sides)
-
+    if (x < radius || x > width-radius){
+      xSpeed = -xSpeed;
+    }
+    if (y < radius || y > height-radius){
+      ySpeed = -ySpeed;
+    }
     //Part 4
     //Add a small adjustment for gravity. Gravity is a ySpeed acceleration...
     //You don't need a variable for this if every object experiences the same
     //gravitational constant (find the value that looks nice experimentally, 9.8 will not work well).
-
+    final float gravCons = 9.81;
   }
 }
  
