@@ -54,6 +54,12 @@ public class Orb {
     //You don't need a variable for this if every object experiences the same
     //gravitational constant (find the value that looks nice experimentally, 9.8 will not work well).
     final float gravCons = 0.5;
-    ySpeed += gravCons;
+    //ySpeed += gravCons;
+  }
+  
+  void attract(Orb b){
+    float d = dist(x,y,b.x,b.y);
+    xSpeed = (b.x-x)/d;
+    ySpeed = (b.y-y)/d;
   }
 }
