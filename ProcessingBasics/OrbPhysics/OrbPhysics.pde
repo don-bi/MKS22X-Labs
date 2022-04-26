@@ -1,7 +1,7 @@
 ArrayList<Orb>orbList;
 Orb center;
 void setup() {
-  size(1000, 700);
+  size(1000, 800);
   orbList = new ArrayList<Orb>();
   center = new Orb(width/2,height/2,0,0,50);
 }
@@ -12,7 +12,7 @@ void mouseClicked() {
   //the xSpeed and ySpeed should be in the range [-3.0,3.0)
   float mX = mouseX;
   float mY = mouseY;
-  orbList.add(new Orb(mX, mY, random(6)-3, random(6)-3, random(50)+20));
+  orbList.add(new Orb(mX, mY, 5, 0, 20));
 }
 void draw() {
   background(255);
