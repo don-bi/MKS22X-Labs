@@ -33,33 +33,35 @@ public class Orb {
     y += ySpeed;
     //PART 3
     //Change the speed when you collide with the end of the screen (all 4 sides)
-    /*if (x < radius || x > width-radius) {
-      if (x < radius) {
-        x = radius;
-      } else {
-        x = width-radius;
+    if (mode == 0){
+      if (x < radius || x > width-radius) {
+        if (x < radius) {
+          x = radius;
+        } else {
+          x = width-radius;
+        }
+        xSpeed = -xSpeed;
       }
-      xSpeed = -xSpeed;
+      if (y < radius || y > height-radius) {
+        if (y < radius) {
+          y = radius;
+        } else {
+          y = height-radius;
+        }
+        ySpeed = -ySpeed;
+      }
+      //Part 4
+      //Add a small adjustment for gravity. Gravity is a ySpeed acceleration...
+      //You don't need a variable for this if every object experiences the same
+      //gravitational constant (find the value that looks nice experimentally, 9.8 will not work well).
+      final float gravCons = 0.15;
+      ySpeed += gravCons;
     }
-    if (y < radius || y > height-radius) {
-      if (y < radius) {
-        y = radius;
-      } else {
-        y = height-radius;
-      }
-      ySpeed = -ySpeed;
-    }*/
-    //Part 4
-    //Add a small adjustment for gravity. Gravity is a ySpeed acceleration...
-    //You don't need a variable for this if every object experiences the same
-    //gravitational constant (find the value that looks nice experimentally, 9.8 will not work well).
-    final float gravCons = 0.5;
-    //ySpeed += gravCons;
   }
   
   void attract(Orb b){
     float d = dist(x,y,b.x,b.y);
-    xSpeed += (b.x-x)/d;
-    ySpeed += (b.y-y)/d;
+    b.xSpeed += (x-b.x)/d;
+    b.ySpeed += (y-b.y)/d;
   }
 }

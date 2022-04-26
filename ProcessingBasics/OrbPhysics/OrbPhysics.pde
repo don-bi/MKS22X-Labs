@@ -6,7 +6,7 @@ int mode;
 void setup() {
   size(1000, 800);
   orbList = new ArrayList<Orb>();
-  center = new Orb(width/2,height/2,0,0,50);
+  center = new Orb(width/2,height/2,0,0,40);
   backgroundMode = true;
   mode = 0;
 }
@@ -22,7 +22,7 @@ void mouseClicked() {
 void draw() {
   if (backgroundMode) background(255);
   for (Orb o : orbList) {
-    o.attract(center);
+    if (mode == 1) center.attract(o);
     o.move();
     o.display();
     center.display();
@@ -48,5 +48,7 @@ void keyPressed() {
     mode ++;
   }
 }
-  
+int getMode() {
+  return mode;
+}
  
