@@ -30,6 +30,15 @@ void draw() {
   fill(0);
   text(frameRate, 20, 20);
   text(orbList.size(), 20, 40);
+  String smode = "";
+  switch (mode){
+    case 0: smode = "GRAVITY";
+      break;
+    case 1: smode = "ORBIT";
+      break;
+  }
+  text(smode, 20, 60);
+      
 }
 void keyPressed() {
   if (key == BACKSPACE) orbList.clear();
