@@ -27,6 +27,7 @@ void draw() {
     if (MODE == ORBIT) center.attract(o);
     o.move();
     o.display();
+    line(o.x,o.y,o.x+o.xSpeed*5,o.y+o.ySpeed*5);
     center.display();
   }
   fill(0);
