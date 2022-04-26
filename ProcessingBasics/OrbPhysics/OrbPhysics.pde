@@ -1,9 +1,14 @@
 ArrayList<Orb>orbList;
 Orb center;
+boolean backgroundMode;
+int mode;
+
 void setup() {
   size(1000, 800);
   orbList = new ArrayList<Orb>();
   center = new Orb(width/2,height/2,0,0,50);
+  backgroundMode = true;
+  mode = 0;
 }
 void mouseClicked() {
   //add a new Orb to the orbList, constructed as follows:
@@ -15,7 +20,7 @@ void mouseClicked() {
   orbList.add(new Orb(mX, mY, 5, 0, 20));
 }
 void draw() {
-  background(255);
+  if (backgroundMode) background(255);
   for (Orb o : orbList) {
     o.attract(center);
     o.move();
@@ -26,3 +31,13 @@ void draw() {
   text(frameRate, 20, 20);
   text(orbList.size(), 20, 40);
 }
+void keyPressed() {
+  if (key == BACKSPACE) orbList.clear();
+  if (key == 'b') backgroundMode = !backgroundMode;
+  if (key == ' '){
+    if (mode == 1) mode = -1;
+    mode ++;
+  }
+}
+  
+ 
