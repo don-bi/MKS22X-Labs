@@ -33,7 +33,7 @@ public class Orb {
     y += ySpeed;
     //PART 3
     //Change the speed when you collide with the end of the screen (all 4 sides)
-    if (mode == 0){
+    if (MODE == GRAVITY){
       if (x < radius || x > width-radius) {
         if (x < radius) {
           x = radius;
@@ -61,7 +61,7 @@ public class Orb {
   
   void attract(Orb b){
     float d = dist(x,y,b.x,b.y);
-    b.xSpeed += (x-b.x)/d;
-    b.ySpeed += (y-b.y)/d;
+    b.xSpeed += (20*(x-b.x))/(d*d);
+    b.ySpeed += (20*(y-b.y))/(d*d);
   }
 }
