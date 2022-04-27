@@ -1,16 +1,22 @@
-int GRAVITY = 0;
-int ORBIT = 1;
-int MODE = GRAVITY;
+final int GRAVITY = 0;
+final int ORBIT = 1;
+final int MODE = GRAVITY;
+final float SPRING_CONSTANT = 0.9;
+final float SPRING_LENGTH = 120;
+final float SPRING_DAMPEN = 0.95;
+
 
 ArrayList<Orb>orbList;
 Orb center;
 boolean backgroundMode;
+boolean gravityMode;
 
 void setup() {
   size(1000, 800);
   orbList = new ArrayList<Orb>();
   center = new Orb(width/2,height/2,0,0,40);
   backgroundMode = true;
+  gravityMode = true;
 }
 void mouseClicked() {
   //add a new Orb to the orbList, constructed as follows:
@@ -46,6 +52,7 @@ void draw() {
 void keyPressed() {
   if (key == BACKSPACE) orbList.clear();
   if (key == 'b') backgroundMode = !backgroundMode;
+  if (key == 'g') gravityMode = !gravityMode;
   if (key == ' '){
     if (MODE == 1) MODE = -1;
     MODE ++;

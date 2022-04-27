@@ -64,4 +64,9 @@ public class Orb {
     b.xSpeed += (20*(x-b.x))/(d*d);
     b.ySpeed += (20*(y-b.y))/(d*d);
   }
+  
+  void attractSpring(Orb b){
+    float d = dist(x,y,b.x,b.y);
+    float force = 
+    b.xSpeed += (
 }
