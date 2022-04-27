@@ -1,7 +1,8 @@
 final int GRAVITY = 0;
 final int ORBIT = 1;
-final int MODE = GRAVITY;
-final float SPRING_CONSTANT = 0.9;
+final int SPRING = 2;
+int MODE = GRAVITY;
+final float SPRING_CONSTANT = 0.015;
 final float SPRING_LENGTH = 120;
 final float SPRING_DAMPEN = 0.95;
 
@@ -31,6 +32,10 @@ void draw() {
   if (backgroundMode) background(255);
   for (Orb o : orbList) {
     if (MODE == ORBIT) center.attract(o);
+    if (MODE == SPRING) {
+      center.attractSpring(o);
+      line (center.x,center.y,o.x,o.y);
+    }
     o.move();
     o.display();
     line(o.x,o.y,o.x+o.xSpeed*5,o.y+o.ySpeed*5);
@@ -45,6 +50,8 @@ void draw() {
       break;
     case 1: smode = "ORBIT";
       break;
+    case 2: smode = "SPRING";
+      break;
   }
   text(smode, 20, 60);
       
@@ -54,7 +61,7 @@ void keyPressed() {
   if (key == 'b') backgroundMode = !backgroundMode;
   if (key == 'g') gravityMode = !gravityMode;
   if (key == ' '){
-    if (MODE == 1) MODE = -1;
+    if (MODE == 2) MODE = -1;
     MODE ++;
   }
 }

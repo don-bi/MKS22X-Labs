@@ -54,9 +54,11 @@ public class Orb {
       //Add a small adjustment for gravity. Gravity is a ySpeed acceleration...
       //You don't need a variable for this if every object experiences the same
       //gravitational constant (find the value that looks nice experimentally, 9.8 will not work well).
-      final float gravCons = 0.15;
-      ySpeed += gravCons;
     }
+    if (gravityMode && MODE != ORBIT) {
+        final float gravCons = 0.15;
+        ySpeed += gravCons;
+      }
   }
   
   void attract(Orb b){
@@ -67,6 +69,10 @@ public class Orb {
   
   void attractSpring(Orb b){
     float d = dist(x,y,b.x,b.y);
-    float force = 
-    b.xSpeed += (
+    float force = SPRING_CONSTANT * (d - SPRING_LENGTH);
+    b.xSpeed += force*((x-b.x)/d);
+    b.xSpeed *= SPRING_DAMPEN;
+    b.ySpeed += force*((y-b.y)/d);
+    b.ySpeed *= SPRING_DAMPEN;
+  }
 }
