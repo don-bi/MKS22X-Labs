@@ -33,7 +33,7 @@ public class Orb {
     y += ySpeed;
     //PART 3
     //Change the speed when you collide with the end of the screen (all 4 sides)
-    if (MODE == GRAVITY){
+    if (MODE == GRAVITY || MODE == SPECIAL){
       if (x < radius || x > width-radius) {
         if (x < radius) {
           x = radius;
