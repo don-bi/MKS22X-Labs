@@ -52,12 +52,7 @@ public class OrbNode {
     /*you write this part*/
     OrbNode[] two = {prev,next};
     for (OrbNode orb:two){
-      float d = dist(orb.x,orb.y,x,y);
-      float force = SPRING_CONSTANT * (d - SPRING_LENGTH);
-      dx += force*((orb.x-x)/d);
-      dx *= SPRING_DAMPEN;
-      dy += force*((orb.y-y)/d);
-      dy *= SPRING_DAMPEN;
+      orb.springAttract(this);
     }
     //apply velocity to position
     x+=dx;
