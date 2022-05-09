@@ -27,6 +27,10 @@ public class OrbList {
    */
   void processAll() {
     OrbNode current = first;
+    while (current != null){
+      current.move();
+      current = current.next;
+    }
     //advance current to next until it is null, move() each of the nodes
   }
   /**
