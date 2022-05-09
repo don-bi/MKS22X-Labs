@@ -44,7 +44,15 @@ public class OrbNode {
   void move() {
     //have prev and next apply spring force to this node;
     /*you write this part*/
-
+    OrbNode[] two = {prev,next};
+    for (OrbNode orb:two){
+      float d = dist(orb.x,orb.y,x,y);
+      float force = SPRING_CONSTANT * (d - SPRING_LENGTH);
+      dx += force*((orb.x-x)/d);
+      dx *= SPRING_DAMPEN;
+      dy += force*((orb.y-y)/d);
+      dy *= SPRING_DAMPEN;
+    }
     //apply velocity to position
     x+=dx;
     y+=dy;
