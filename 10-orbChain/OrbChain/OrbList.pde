@@ -39,6 +39,10 @@ public class OrbList {
    */
   void display() {
     OrbNode current = first;
+    while (current != null){
+      current.display();
+      current = current.next;
+    }
     //advance current to next until it is null, display() each of the nodes
   }
 }
