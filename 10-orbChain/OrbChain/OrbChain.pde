@@ -23,7 +23,13 @@ void draw() {
   text("Gravity: "+GRAVITY,10,80);
 }
 void keyPressed() {
-  if (key == '1'){
-  }
+  if (key == '1') SPRING_CONSTANT*=1.05;
+  if (key == '2') SPRING_CONSTANT*=0.95;
+  if (key == '3') SPRING_DAMPEN*=1.05;
+  if (key == '4') SPRING_DAMPEN*=0.95;
+  if (key == '5') SPRING_LENGTH*=1.05;
+  if (key == '6') SPRING_LENGTH*=0.95;
+  if (key == '7') GRAVITY*=1.05;
+  if (key == '8') GRAVITY*=0.95;
 }
     
