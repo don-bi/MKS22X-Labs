@@ -24,12 +24,26 @@ void draw() {
 }
 void keyPressed() {
   if (key == '1') SPRING_CONSTANT*=1.05;
-  if (key == '2') SPRING_CONSTANT*=0.95;
-  if (key == '3') SPRING_DAMPEN*=1.05;
-  if (key == '4') SPRING_DAMPEN*=0.95;
+  if (key == '2') {
+    SPRING_CONSTANT*=0.95;
+    if (SPRING_CONSTANT < 0.0) SPRING_CONSTANT = 0.0;
+  }
+  if (key == '3') {
+    SPRING_DAMPEN*=1.05;
+    if (SPRING_DAMPEN > 1.0) SPRING_DAMPEN = 1.0;
+  }
+  if (key == '4') {
+    SPRING_DAMPEN*=0.95;
+    if (SPRING_DAMPEN < 0.0) SPRING_DAMPEN = 0.0;
   if (key == '5') SPRING_LENGTH*=1.05;
-  if (key == '6') SPRING_LENGTH*=0.95;
+  if (key == '6') {
+    SPRING_LENGTH*=0.95;
+    if (SPRING_LENGTH < 0) SPRING_LENGTH = 0;
+  }
   if (key == '7') GRAVITY*=1.05;
-  if (key == '8') GRAVITY*=0.95;
+  if (key == '8') {
+    GRAVITY*=0.95;
+    if (GRAVITY = 0) GRAVITY = 0;
+  }
 }
     
