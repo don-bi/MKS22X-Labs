@@ -29,6 +29,7 @@ void draw() {
   text("Spring Dampen: "+SPRING_DAMPEN,10,40);
   text("Spring Constant: "+SPRING_CONSTANT,10,60);
   text("Gravity: "+GRAVITY,10,80);
+  text("Mode: "+clickMode,10,100);
 }
 void keyPressed() {
   if (key == '1') SPRING_CONSTANT*=1.05;

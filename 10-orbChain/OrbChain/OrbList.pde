@@ -58,6 +58,7 @@ public class OrbList {
         current.prev.next = toBeAdded;
         current.prev = toBeAdded;
       }
+      current = current.next;
     }
   }
   
@@ -67,6 +68,7 @@ public class OrbList {
       if (dist(x,y,current.x,current.y) <= current.radius){
         return current;
       }
+      current = current.next;
     }
     return null;
   }
@@ -79,6 +81,7 @@ public class OrbList {
           current.prev.next = current.next;
           current.next.prev = current.prev;
         }
+        current = current.next;
       }
     }
   }
