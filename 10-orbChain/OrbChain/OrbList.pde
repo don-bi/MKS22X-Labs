@@ -55,8 +55,8 @@ public class OrbList {
         end = true;
         toBeAdded.prev = current.prev;
         toBeAdded.next = current;
-        current.prev.next = orb;
-        current.prev = orb;
+        current.prev.next = toBeAdded;
+        current.prev = toBeAdded;
       }
     }
   }
@@ -68,6 +68,7 @@ public class OrbList {
         return current;
       }
     }
+    return null;
   }
   
   void delete(OrbNode target){
