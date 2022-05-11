@@ -70,5 +70,16 @@ public class OrbList {
     }
   }
   
-  
+  void delete(OrbNode target){
+    if (target != null){
+      OrbNode current = first;
+      while (current != null){
+        if (current == target){
+          current.prev.next = current.next;
+          current.next.prev = current.prev;
+        }
+      }
+    }
+  }
+          
 }
