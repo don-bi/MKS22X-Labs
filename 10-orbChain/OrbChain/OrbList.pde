@@ -65,7 +65,7 @@ public class OrbList {
   OrbNode getNodeAt(int x,int y){
     OrbNode current = first;
     while(current != null){
-      if (dist(x,y,current.x,current.y) <= current.radius){
+      if (dist(x,y,current.x,current.y) <= current.radius && current != first && current != last){
         return current;
       }
       current = current.next;
