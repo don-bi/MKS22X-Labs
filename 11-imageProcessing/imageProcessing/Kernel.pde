@@ -24,11 +24,13 @@ public class Kernel {
           float[] rgb = {red(c),green(c),blue(c)};
           for (int i = 0; i < rgb.length; i ++){
             float currentc = rgb[i]*kernel[incx+1][incy+1];
-            if (currentc < 0) currentc = 0;
-            if (currentc > 255) currentc = 255;
             sumrgb[i] += currentc;
           }
         }
+      }
+      for (int i = 0; i < sumrgb.length; i ++){
+        if (sumrgb[i] < 0) sumrgb[i] = 0;
+        if (sumrgb[i] > 255) sumrgb[i] = 255;
       }
       return color(sumrgb[0],sumrgb[1],sumrgb[2]);
     }
