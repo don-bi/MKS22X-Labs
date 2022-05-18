@@ -58,7 +58,21 @@ void setup() {
 void draw() {
   PImage car = loadImage("redcar.png");
   PImage output = car.copy();
+<<<<<<< HEAD
   kernels[currentKernel].apply(car, output);
+=======
+  Kernel k = new Kernel( new float[][] {
+    {-1, -1, -1}, 
+    {-1, 8, -1}, 
+    {-1, -1, -1}
+    } );
+  Kernel k2 = new Kernel( new float[][] {
+    {.11, .11, .11}, 
+    {.11, .11, .11}, 
+    {.11, .11, .11}
+    } );
+  k.apply(car, output);
+>>>>>>> b2ad3b33739904ed37a1bfeeef14ccef4bbc572c
   image(car, 0, 0);
   image(output, car.width, 0);
   textSize(30);
