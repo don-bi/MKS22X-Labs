@@ -23,7 +23,7 @@ public class Kernel {
           color c = img.get(x+incx, y+incy);
           float[] rgb = {red(c), green(c), blue(c)};
           for (int i = 0; i < rgb.length; i ++) {
-            float currentc = rgb[i]*kernel[incx+1][incy+1];
+            float currentc = rgb[i]*kernel[incy+1][incx+1];
             sumrgb[i] += currentc;
           }
         }
