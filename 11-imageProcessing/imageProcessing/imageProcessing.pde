@@ -56,7 +56,9 @@ void setup() {
 }
 
 void draw() {
-  k.apply(car, output);
+  PImage car = loadImage("redcar.png");
+  PImage output = car.copy();
+  kernels[currentKernel].apply(car, output);
   image(car, 0, 0);
   image(output, car.width, 0);
   textSize(30);
@@ -65,9 +67,7 @@ void draw() {
 }
 
 void keyPressed() {
-  if (key == ' ') {
-    currentKernel++;
-  } 
+  currentKernel++;
   if (currentKernel == names.length) {
     currentKernel = 0;
   }
